@@ -12,7 +12,7 @@ export class SudokuCellComponent implements OnInit, OnDestroy {
   @Input() row: number = 0;
   @Input() col: number = 0;
 
-  public sudokuSize: number | null = null;
+  public sudokuSize: number = 0;
   public id: number = -1;
   public blockId: number = -1;
   public selected: boolean = false;
@@ -27,16 +27,9 @@ export class SudokuCellComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.sudokuService.$size
-      .pipe(takeUntil(this.$destroy))
-      .subscribe((s: number | null) => {
-        this.sudokuSize = s;
-        if (this.sudokuSize) {
-          this.id = this.row * this.sudokuSize + this.col;
-        } else {
-          console.error("sudoku size is null");
-        }
-      })
+    this.sudokuSize = this.sudokuService.getSize();
+    this.id = this.row * this.sudokuSize + this.col;
+    this.blockId = Math.floor(this.row / this.sudokuService.getBlockHeight()) * this.sudokuService.getHorizontalBlockCount() + Math.floor(this.col / this.sudokuService.getBlockWidth());
 
     this.sudokuService.$selectedCellIds
       .pipe(takeUntil(this.$destroy))
@@ -52,7 +45,7 @@ export class SudokuCellComponent implements OnInit, OnDestroy {
 
     this.sudokuService.$clearCells
       .pipe(takeUntil(this.$destroy))
-      .subscribe(() => this.value = null);
+      .subscribe(() => this.clearCell());
 
     this.sudokuService.$puzzle
       .pipe(takeUntil(this.$destroy))
@@ -96,6 +89,12 @@ export class SudokuCellComponent implements OnInit, OnDestroy {
       colCounter++;
     }
     return Array.from(ids);
+  }
+
+  clearCell(): void {
+    this.value = null;
+    this.cornerValues = [];
+    this.centerValues = [];
   }
 
   ngOnDestroy() {

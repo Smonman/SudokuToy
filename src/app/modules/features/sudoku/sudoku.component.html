@@ -6,8 +6,7 @@
           <ng-container *ngFor="let _ of [].constructor(blockHeight); let row = index">
             <div class="d-flex">
               <ng-container *ngFor="let _ of [].constructor(blockWidth); let col = index">
-                <app-sudoku-cell [col]="col + hb * blockWidth" [row]="row + vb * blockHeight"
-                                 [size]="size"></app-sudoku-cell>
+                <app-sudoku-cell [col]="col + hb * blockWidth" [row]="row + vb * blockHeight"></app-sudoku-cell>
               </ng-container>
             </div>
           </ng-container>

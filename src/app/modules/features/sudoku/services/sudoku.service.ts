@@ -6,11 +6,11 @@ import { BehaviorSubject, Observable, Subject } from "rxjs";
 })
 export class SudokuService {
 
-  private size = new BehaviorSubject<number | null>(null);
-  private verticalBlockCount = new BehaviorSubject<number | null>(null);
-  private horizontalBlockCount = new BehaviorSubject<number | null>(null);
-  private blockWidth = new BehaviorSubject<number | null>(null);
-  private blockHeight = new BehaviorSubject<number | null>(null);
+  private size = new BehaviorSubject<number>(0);
+  private verticalBlockCount = new BehaviorSubject<number>(0);
+  private horizontalBlockCount = new BehaviorSubject<number>(0);
+  private blockWidth = new BehaviorSubject<number>(0);
+  private blockHeight = new BehaviorSubject<number>(0);
   private selectedCellIds = new BehaviorSubject<number[]>([]);
   private highlightedCellIds = new BehaviorSubject<number[]>([]);
   private puzzle = new BehaviorSubject<string | null>(null);
@@ -20,23 +20,23 @@ export class SudokuService {
   constructor() {
   }
 
-  get $size(): Observable<number | null> {
+  get $size(): Observable<number> {
     return this.size.asObservable();
   }
 
-  get $verticalBlockCount(): Observable<number | null> {
+  get $verticalBlockCount(): Observable<number> {
     return this.verticalBlockCount.asObservable();
   }
 
-  get $horizontalBlockCount(): Observable<number | null> {
+  get $horizontalBlockCount(): Observable<number> {
     return this.horizontalBlockCount.asObservable();
   }
 
-  get $blockWidth(): Observable<number | null> {
+  get $blockWidth(): Observable<number> {
     return this.blockWidth.asObservable();
   }
 
-  get $blockHeight(): Observable<number | null> {
+  get $blockHeight(): Observable<number> {
     return this.blockHeight.asObservable();
   }
 
@@ -56,23 +56,43 @@ export class SudokuService {
     return this.highlightedCellIds.asObservable();
   }
 
-  setSize(value: number | null): void {
+  getSize(): number {
+    return this.size.getValue();
+  }
+
+  getVerticalBlockCount(): number {
+    return this.verticalBlockCount.getValue();
+  }
+
+  getHorizontalBlockCount(): number {
+    return this.horizontalBlockCount.getValue();
+  }
+
+  getBlockWidth(): number {
+    return this.blockWidth.getValue();
+  }
+
+  getBlockHeight(): number {
+    return this.blockHeight.getValue();
+  }
+
+  setSize(value: number): void {
     this.size.next(value);
   }
 
-  setVerticalBlockCount(value: number | null): void {
+  setVerticalBlockCount(value: number): void {
     this.verticalBlockCount.next(value);
   }
 
-  setHorizontalBlockCount(value: number | null): void {
+  setHorizontalBlockCount(value: number): void {
     this.horizontalBlockCount.next(value);
   }
 
-  setBlockWidth(value: number | null): void {
+  setBlockWidth(value: number): void {
     this.blockWidth.next(value);
   }
 
-  setBlockHeight(value: number | null): void {
+  setBlockHeight(value: number): void {
     this.blockHeight.next(value);
   }
 
