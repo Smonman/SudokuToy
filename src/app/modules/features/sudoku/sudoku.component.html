@@ -1,0 +1,18 @@
+<div class="border border-dark border-3 d-inline-block m-0 p-0">
+  <ng-container *ngFor="let _ of [].constructor(verticalBlockCount); let vb = index;">
+    <div class="d-flex">
+      <ng-container *ngFor="let _ of [].constructor(horizontalBlockCount); let hb = index;">
+        <div class="border border-dark border-2 d-inline-block mb-0 p-0">
+          <ng-container *ngFor="let _ of [].constructor(blockHeight); let row = index">
+            <div class="d-flex">
+              <ng-container *ngFor="let _ of [].constructor(blockWidth); let col = index">
+                <app-sudoku-cell [col]="col + hb * blockWidth" [row]="row + vb * blockHeight"
+                                 [size]="size"></app-sudoku-cell>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

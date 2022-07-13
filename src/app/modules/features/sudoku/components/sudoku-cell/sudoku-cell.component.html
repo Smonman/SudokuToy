@@ -1,0 +1,12 @@
+<div
+  class="cell border p-2 d-flex align-items-center justify-content-around hover no-select position-relative"
+  role="button">
+  <div [class.invisible]="!selected" class="position-absolute top-0 start-0 w-100 h-100 bg-opacity-25 bg-primary"></div>
+  <div [class.invisible]="!highlighted"
+       class="position-absolute top-0 start-0 w-100 h-100 bg-opacity-10 bg-primary"></div>
+  <div
+    [class.text-primary]="!readonly"
+    class="d-flex flex-column align-items-center justify-content-around h3 p-0 m-0">
+    {{value}}
+  </div>
+</div>

@@ -1,0 +1,23 @@
+.cell {
+  min-width: 4rem;
+  min-height: 4rem;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.selected {
+  background-color: aquamarine;
+}
+
+.hover:hover:not(.selected) {
+  background-color: whitesmoke;
+}
+
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
