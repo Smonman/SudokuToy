@@ -9,6 +9,13 @@ const routes: Routes = [
         (m) => m.PlaygroundModule
       )
   },
+  {
+    path: 'new',
+    loadChildren: () =>
+      import('./modules/features/puzzle-loader/puzzle-loader.module').then(
+        (m) => m.PuzzleLoaderModule
+      )
+  },
   {path: '**', redirectTo: ''}
 ];
 
