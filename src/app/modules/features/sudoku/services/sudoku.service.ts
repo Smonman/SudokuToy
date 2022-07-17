@@ -16,6 +16,8 @@ export class SudokuService {
   private puzzle = new BehaviorSubject<string | null>(null);
   private clearCells = new Subject<void>();
   private cellIds: number[] = [];
+  private curInputModeIndex = new BehaviorSubject(0);
+  private inputModeCount = 0;
 
   constructor() {
   }
@@ -56,6 +58,10 @@ export class SudokuService {
     return this.highlightedCellIds.asObservable();
   }
 
+  get $curInputModeIndex(): Observable<number> {
+    return this.curInputModeIndex.asObservable();
+  }
+
   getSize(): number {
     return this.size.getValue();
   }
@@ -74,6 +80,10 @@ export class SudokuService {
 
   getBlockHeight(): number {
     return this.blockHeight.getValue();
+  }
+
+  getCurInputIndex(): number {
+    return this.curInputModeIndex.getValue();
   }
 
   setSize(value: number): void {
@@ -114,6 +124,18 @@ export class SudokuService {
 
   setHighlightedCellIds(cellIds: number[]): void {
     this.highlightedCellIds.next(cellIds);
+  }
+
+  switchInput(): void {
+    this.setCurInputModeIndex((this.getCurInputIndex() + 1) % this.inputModeCount);
+  }
+
+  setCurInputModeIndex(index: number): void {
+    this.curInputModeIndex.next(index);
+  }
+
+  setInputModeCount(value: number): void {
+    this.inputModeCount = value;
   }
 
   updateSelectedCellId(id: number): void {

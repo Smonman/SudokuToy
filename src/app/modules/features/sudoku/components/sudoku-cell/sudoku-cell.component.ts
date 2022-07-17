@@ -1,6 +1,10 @@
 import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { SudokuService } from "../../services/sudoku.service";
 import { Subject, takeUntil } from "rxjs";
+import { InputMode } from "../../../../shared/classes/input-mode";
+import { ValueMode } from "../../value-mode";
+import { CornerMode } from "../../corner-mode";
+import { CenterMode } from "../../center-mode";
 
 @Component({
   selector: 'app-sudoku-cell',
@@ -18,9 +22,8 @@ export class SudokuCellComponent implements OnInit, OnDestroy {
   public selected: boolean = false;
   public highlighted: boolean = false;
   public readonly: boolean = false;
-  public value: number | null = null;
-  public cornerValues: number[] = [];
-  public centerValues: number[] = [];
+  public curInputModeIndex: number = 0;
+  public inputModes: InputMode[] = [];
   private $destroy = new Subject<void>();
 
   constructor(private sudokuService: SudokuService) {
@@ -30,6 +33,9 @@ export class SudokuCellComponent implements OnInit, OnDestroy {
     this.sudokuSize = this.sudokuService.getSize();
     this.id = this.row * this.sudokuSize + this.col;
     this.blockId = Math.floor(this.row / this.sudokuService.getBlockHeight()) * this.sudokuService.getHorizontalBlockCount() + Math.floor(this.col / this.sudokuService.getBlockWidth());
+
+    this.inputModes = [new ValueMode(), new CornerMode(), new CenterMode()];
+    this.sudokuService.setInputModeCount(this.inputModes.length);
 
     this.sudokuService.$selectedCellIds
       .pipe(takeUntil(this.$destroy))
@@ -50,8 +56,15 @@ export class SudokuCellComponent implements OnInit, OnDestroy {
     this.sudokuService.$puzzle
       .pipe(takeUntil(this.$destroy))
       .subscribe((p: string | null) => {
-        this.value = Number(p?.charAt(this.id)) || null;
-        this.readonly = Boolean(this.value);
+        const v = Number(p?.charAt(this.id)) || null;
+        this.inputModes[0].updateValue(v);
+        this.readonly = Boolean(v);
+      });
+
+    this.sudokuService.$curInputModeIndex
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((index: number) => {
+        this.curInputModeIndex = index;
       });
   }
 
@@ -69,11 +82,21 @@ export class SudokuCellComponent implements OnInit, OnDestroy {
   @HostListener('window:keyup', ['$event'])
   updateInput(e: KeyboardEvent): void {
     if (this.selected && !this.readonly) {
-      this.value = Number(e.key) || this.value;
+      if (Number(e.key)) {
+        this.curInputMode().updateValue(Number(e.key));
+      }
       if (e.key === 'Backspace' || e.key === 'Delete') {
-        this.value = null;
+        this.curInputMode().updateValue(null);
       }
     }
+  }
+
+  curInputMode(): InputMode {
+    return this.inputModes[this.curInputModeIndex];
+  }
+
+  switchInputMode(): void {
+    this.sudokuService.setCurInputModeIndex((this.curInputModeIndex + 1) % this.inputModes.length);
   }
 
   computeHighlightedCellIds(): number[] {
@@ -92,9 +115,9 @@ export class SudokuCellComponent implements OnInit, OnDestroy {
   }
 
   clearCell(): void {
-    this.value = null;
-    this.cornerValues = [];
-    this.centerValues = [];
+    for (const inputMode of this.inputModes) {
+      inputMode.updateValue(null);
+    }
   }
 
   ngOnDestroy() {
