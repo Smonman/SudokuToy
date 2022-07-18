@@ -14,7 +14,7 @@
   <ng-container *ngIf="inputModes[0].value == null">
     <!-- corner -->
     <div
-      class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-row flex-wrap align-items-start justify-content-start p-0 m-0 bg-transparent"
+      class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-row flex-wrap align-items-start justify-content-start p-0 m-0 bg-transparent text-primary"
       style="font-size: 0.7rem">
       <span *ngFor="let v of $any(inputModes[1]).value">
         {{v}}
@@ -22,7 +22,7 @@
     </div>
     <!-- center -->
     <div
-      class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-row align-items-center justify-content-center p-0 m-0 bg-transparent"
+      class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-row align-items-center justify-content-center p-0 m-0 bg-transparent text-primary"
       style="font-size: 0.8rem">
       <span *ngFor="let v of $any(inputModes[2]).value">
         {{v}}
