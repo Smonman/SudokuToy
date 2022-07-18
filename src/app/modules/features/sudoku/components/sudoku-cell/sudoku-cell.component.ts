@@ -84,6 +84,8 @@ export class SudokuCellComponent implements OnInit, OnDestroy {
     if (this.selected && !this.readonly) {
       if (Number(e.key)) {
         this.curInputMode().updateValue(Number(e.key));
+        console.log('update value:', Number(e.key));
+        console.log('value:', this.curInputMode().value);
       }
       if (e.key === 'Backspace' || e.key === 'Delete') {
         this.curInputMode().updateValue(null);

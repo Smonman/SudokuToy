@@ -37,9 +37,10 @@ export class ComplexInputMode implements InputMode {
           return e !== value;
         });
       } else {
-        this.value.push(value);
+        this.value = [...this.value, value];
         this.value.sort();
       }
     }
+    console.log(this.value);
   }
 }

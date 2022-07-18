@@ -1,5 +1,5 @@
 <div
-  class="cell border p-2 d-flex align-items-center justify-content-around hover no-select position-relative"
+  class="cell border d-flex align-items-center justify-content-around hover no-select position-relative"
   role="button">
   <div [class.invisible]="!selected" class="position-absolute top-0 start-0 w-100 h-100 bg-opacity-25 bg-primary"></div>
   <div [class.invisible]="!highlighted"
@@ -7,18 +7,26 @@
   <ng-container *ngIf="inputModes[0].value != null">
     <div
       [class.text-primary]="!readonly"
-      class="d-flex flex-column align-items-center justify-content-around h3 p-0 m-0">
+      class="d-flex flex-column align-items-center justify-content-around h3 p-2 m-0">
       {{inputModes[0].value}}
     </div>
   </ng-container>
   <ng-container *ngIf="inputModes[0].value == null">
+    <!-- corner -->
     <div
-      class="d-flex flex-column align-items-start justify-content-start fs-6 p-0 m-0 text-danger">
-      {{inputModes[1].value}}
+      class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-row flex-wrap align-items-start justify-content-start p-0 m-0 bg-transparent"
+      style="font-size: 0.7rem">
+      <span *ngFor="let v of $any(inputModes[1]).value">
+        {{v}}
+      </span>
     </div>
+    <!-- center -->
     <div
-      class="d-flex flex-column align-items-center justify-content-around fs-6 p-0 m-0 text-success">
-      {{inputModes[2].value}}
+      class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-row align-items-center justify-content-center p-0 m-0 bg-transparent"
+      style="font-size: 0.8rem">
+      <span *ngFor="let v of $any(inputModes[2]).value">
+        {{v}}
+      </span>
     </div>
   </ng-container>
 </div>
