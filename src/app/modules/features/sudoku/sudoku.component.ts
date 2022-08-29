@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { SudokuService } from "./services/sudoku.service";
 import { Subject, takeUntil } from "rxjs";
 
@@ -8,12 +8,11 @@ import { Subject, takeUntil } from "rxjs";
   styleUrls: ['./sudoku.component.css']
 })
 export class SudokuComponent implements OnInit, OnDestroy {
-  @Input() size: number = 9;
-  @Input() blockWidth: number = 3;
-  @Input() blockHeight: number = 3;
-
-  public verticalBlockCount: number = -1;
-  public horizontalBlockCount: number = -1;
+  public size: number = 0;
+  public blockWidth: number = 0;
+  public blockHeight: number = 0;
+  public verticalBlockCount: number = 0;
+  public horizontalBlockCount: number = 0;
   public curInputMode: number = 0;
 
   private $destroy = new Subject<void>();
@@ -22,14 +21,25 @@ export class SudokuComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.verticalBlockCount = this.size / this.blockWidth;
-    this.horizontalBlockCount = this.size / this.blockHeight;
+    this.sudokuService.$size
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((size: number) => this.size = size);
 
-    this.sudokuService.setSize(this.size);
-    this.sudokuService.setVerticalBlockCount(this.verticalBlockCount);
-    this.sudokuService.setHorizontalBlockCount(this.horizontalBlockCount);
-    this.sudokuService.setBlockWidth(this.blockWidth);
-    this.sudokuService.setBlockHeight(this.blockHeight);
+    this.sudokuService.$blockWidth
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((blockWidth: number) => this.blockWidth = blockWidth);
+
+    this.sudokuService.$blockHeight
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((blockHeight: number) => this.blockHeight = blockHeight);
+
+    this.sudokuService.$verticalBlockCount
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((verticalBlockCount: number) => this.verticalBlockCount = verticalBlockCount);
+
+    this.sudokuService.$horizontalBlockCount
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((horizontalBlockCount: number) => this.horizontalBlockCount = horizontalBlockCount);
 
     this.sudokuService.$curInputModeIndex
       .pipe(takeUntil(this.$destroy))

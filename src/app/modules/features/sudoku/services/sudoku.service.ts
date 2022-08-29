@@ -6,11 +6,11 @@ import { BehaviorSubject, Observable, Subject } from "rxjs";
 })
 export class SudokuService {
 
-  private size = new BehaviorSubject<number>(0);
-  private verticalBlockCount = new BehaviorSubject<number>(0);
-  private horizontalBlockCount = new BehaviorSubject<number>(0);
-  private blockWidth = new BehaviorSubject<number>(0);
-  private blockHeight = new BehaviorSubject<number>(0);
+  private size = new BehaviorSubject<number>(9);
+  private verticalBlockCount = new BehaviorSubject<number>(3);
+  private horizontalBlockCount = new BehaviorSubject<number>(3);
+  private blockWidth = new BehaviorSubject<number>(3);
+  private blockHeight = new BehaviorSubject<number>(3);
   private selectedCellIds = new BehaviorSubject<number[]>([]);
   private highlightedCellIds = new BehaviorSubject<number[]>([]);
   private puzzle = new BehaviorSubject<string | null>(null);

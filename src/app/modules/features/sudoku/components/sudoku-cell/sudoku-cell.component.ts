@@ -12,7 +12,6 @@ import { CenterMode } from "../../center-mode";
   styleUrls: ['./sudoku-cell.component.css']
 })
 export class SudokuCellComponent implements OnInit, OnDestroy {
-
   @Input() row: number = 0;
   @Input() col: number = 0;
 
