@@ -12,6 +12,7 @@ export class TimerService {
   private reset = new ReplaySubject<void>();
   private isRunning = new BehaviorSubject<boolean>(false);
   private isPaused = new BehaviorSubject<boolean>(false);
+  private isStopped = new BehaviorSubject<boolean>(false);
 
   constructor() {
   }
@@ -40,27 +41,34 @@ export class TimerService {
     return this.isPaused.asObservable();
   }
 
+  get $isStopped(): Observable<boolean> {
+    return this.isStopped.asObservable();
+  }
+
   startTimer() {
     this.start.next();
     this.isRunning.next(true);
     this.isPaused.next(false);
+    this.isStopped.next(false);
   }
 
   pauseTimer() {
     this.pause.next();
     this.isRunning.next(false);
     this.isPaused.next(true);
+    this.isStopped.next(false);
   }
 
   stopTimer() {
     this.stop.next();
     this.isRunning.next(false);
     this.isPaused.next(false);
+    this.isStopped.next(true);
   }
 
   resetTimer() {
     this.reset.next();
-    this.isRunning.next(false);
     this.isPaused.next(false);
+    this.isStopped.next(false);
   }
 }

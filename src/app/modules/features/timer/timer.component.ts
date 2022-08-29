@@ -11,6 +11,7 @@ export class TimerComponent implements OnInit, OnDestroy {
 
   public isRunning: boolean = false;
   public isPaused: boolean = false;
+  public isStopped: boolean = false;
   public curTime: number = 0;
   private $destroy = new Subject<void>();
   private intervalId: number = -1;
@@ -22,46 +23,62 @@ export class TimerComponent implements OnInit, OnDestroy {
     this.timerService.$start
       .pipe(takeUntil(this.$destroy))
       .subscribe(() => {
-        this.start();
+        this.intervalId = window.setInterval(() => {
+          this.curTime += 1;
+        }, 1000);
       });
 
     this.timerService.$pause
       .pipe(takeUntil(this.$destroy))
-      .subscribe(() => this.pause());
+      .subscribe(() => {
+        window.clearInterval(this.intervalId);
+      });
 
     this.timerService.$stop
       .pipe(takeUntil(this.$destroy))
-      .subscribe(() => this.stop());
+      .subscribe(() => {
+        window.clearInterval(this.intervalId);
+      });
 
     this.timerService.$reset
       .pipe(takeUntil(this.$destroy))
-      .subscribe(() => this.reset());
+      .subscribe(() => {
+        this.curTime = 0;
+      });
 
     this.timerService.$isRunning
       .pipe(takeUntil(this.$destroy))
-      .subscribe((isRunning: boolean) => this.isRunning = isRunning);
+      .subscribe((isRunning: boolean) => {
+        this.isRunning = isRunning;
+      });
 
     this.timerService.$isPaused
       .pipe(takeUntil(this.$destroy))
-      .subscribe((isPaused: boolean) => this.isPaused = isPaused);
+      .subscribe((isPaused: boolean) => {
+        this.isPaused = isPaused;
+      });
+
+    this.timerService.$isStopped
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((isStopped: boolean) => {
+        this.isStopped = isStopped;
+      });
   }
 
   start() {
-    this.intervalId = window.setInterval(() => {
-      this.curTime += 1;
-    }, 1000);
+    this.timerService.startTimer();
   }
 
   pause() {
-    window.clearInterval(this.intervalId);
+    this.timerService.pauseTimer();
   }
 
   stop() {
-    window.clearInterval(this.intervalId);
+    this.timerService.stopTimer();
   }
 
   reset() {
-    this.curTime = 0;
+    this.timerService.resetTimer();
   }
 
   ngOnDestroy(): void {

@@ -18,7 +18,7 @@ const sharedImports = [
 ];
 
 @NgModule({
-  declarations: [...sharedDeclarations, SecondsPipe],
+  declarations: [...sharedDeclarations],
   imports: [...sharedImports],
   exports: [...sharedImports, ...sharedDeclarations]
 })
