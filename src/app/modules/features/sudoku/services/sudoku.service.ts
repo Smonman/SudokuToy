@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subject, takeUntil } from "rxjs";
+import { InputMode } from "../../../shared/classes/input-mode";
+import { ValueMode } from "../classes/value-mode";
+import { CornerMode } from "../classes/corner-mode";
+import { CenterMode } from "../classes/center-mode";
 
 @Injectable({
   providedIn: 'root'
 })
-export class SudokuService {
-
+export class SudokuService implements OnDestroy {
   private size = new BehaviorSubject<number>(9);
   private verticalBlockCount = new BehaviorSubject<number>(3);
   private horizontalBlockCount = new BehaviorSubject<number>(3);
@@ -16,10 +19,26 @@ export class SudokuService {
   private puzzle = new BehaviorSubject<string | null>(null);
   private clearCells = new Subject<void>();
   private cellIds: number[] = [];
-  private curInputModeIndex = new BehaviorSubject(0);
-  private inputModeCount = 0;
+  private inputModes = new BehaviorSubject<InputMode[]>([]);
+  private curInputMode = new BehaviorSubject<InputMode | null>(null);
+  private curInputModeIndex = new BehaviorSubject<number>(0);
+  private $destroy = new Subject<void>();
 
   constructor() {
+    this.$inputModes
+      .pipe(takeUntil(this.$destroy))
+      .subscribe(() => this.curInputMode.next(this.getInputModes()[this.getCurInputModeIndex()]));
+
+    this.$size
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((size: number) => {
+        console.warn("new size", size);
+        this.inputModes.next([
+          new ValueMode(size),
+          new CornerMode(size),
+          new CenterMode(size)
+        ]);
+      });
   }
 
   get $size(): Observable<number> {
@@ -62,6 +81,19 @@ export class SudokuService {
     return this.curInputModeIndex.asObservable();
   }
 
+  get $curInputMode(): Observable<InputMode | null> {
+    return this.curInputMode.asObservable();
+  }
+
+  get $inputModes(): Observable<InputMode[]> {
+    return this.inputModes.asObservable();
+  }
+
+  ngOnDestroy() {
+    this.$destroy.next();
+    this.$destroy.complete();
+  }
+
   getSize(): number {
     return this.size.getValue();
   }
@@ -82,8 +114,12 @@ export class SudokuService {
     return this.blockHeight.getValue();
   }
 
-  getCurInputIndex(): number {
+  getCurInputModeIndex(): number {
     return this.curInputModeIndex.getValue();
+  }
+
+  getInputModes(): InputMode[] {
+    return this.inputModes.getValue();
   }
 
   setSize(value: number): void {
@@ -127,15 +163,24 @@ export class SudokuService {
   }
 
   switchInput(): void {
-    this.setCurInputModeIndex((this.getCurInputIndex() + 1) % this.inputModeCount);
+    this.setCurInputModeIndex((this.getCurInputModeIndex() + 1) % this.getInputModes().length);
+    this.curInputMode.next(this.getInputModes()[this.getCurInputModeIndex()]);
+  }
+
+  writeToInputMode(index: number, id: number, value: number | number[] | null) {
+    this.getInputModes()[index].updateValue(id, value);
   }
 
   setCurInputModeIndex(index: number): void {
     this.curInputModeIndex.next(index);
   }
 
-  setInputModeCount(value: number): void {
-    this.inputModeCount = value;
+  computeCellId(row: number, col: number): number {
+    return row * this.getSize() + col;
+  }
+
+  computeBlockId(row: number, col: number): number {
+    return Math.floor(row / this.getBlockHeight()) * this.getHorizontalBlockCount() + Math.floor(col / this.getBlockWidth());
   }
 
   updateSelectedCellId(id: number): void {

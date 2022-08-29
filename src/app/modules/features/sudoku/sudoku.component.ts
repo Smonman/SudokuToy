@@ -1,6 +1,7 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { SudokuService } from "./services/sudoku.service";
 import { Subject, takeUntil } from "rxjs";
+import { InputMode } from "../../shared/classes/input-mode";
 
 @Component({
   selector: 'app-sudoku',
@@ -13,7 +14,8 @@ export class SudokuComponent implements OnInit, OnDestroy {
   public blockHeight: number = 0;
   public verticalBlockCount: number = 0;
   public horizontalBlockCount: number = 0;
-  public curInputMode: number = 0;
+  public curInputMode: InputMode | null = null;
+  public curInputModeIndex: number = 0;
 
   private $destroy = new Subject<void>();
 
@@ -43,7 +45,11 @@ export class SudokuComponent implements OnInit, OnDestroy {
 
     this.sudokuService.$curInputModeIndex
       .pipe(takeUntil(this.$destroy))
-      .subscribe((index: number) => this.curInputMode = index);
+      .subscribe((index: number) => this.curInputModeIndex = index);
+
+    this.sudokuService.$curInputMode
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((im: InputMode | null) => this.curInputMode = im);
   }
 
   @HostListener('window:keyup', ['$event'])

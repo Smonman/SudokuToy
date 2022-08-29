@@ -26,12 +26,12 @@ export class PuzzleLoaderComponent implements OnInit, OnDestroy {
     // TODO validation
     console.warn(this.puzzleForm.value);
     console.warn(this.puzzleForm.valid)
-
-    this.sudokuService.setSize(this.puzzleForm.value.size);
+    
+    this.sudokuService.setSize(this.puzzleForm.value.puzzleSize);
     this.sudokuService.setBlockWidth(this.puzzleForm.value.blockWidth);
     this.sudokuService.setBlockHeight(this.puzzleForm.value.blockHeight);
-    this.sudokuService.setHorizontalBlockCount(this.puzzleForm.value.size / this.puzzleForm.value.blockWidth);
-    this.sudokuService.setVerticalBlockCount(this.puzzleForm.value.size / this.puzzleForm.value.blockHeight);
+    this.sudokuService.setHorizontalBlockCount(this.puzzleForm.value.puzzleSize / this.puzzleForm.value.blockWidth);
+    this.sudokuService.setVerticalBlockCount(this.puzzleForm.value.puzzleSize / this.puzzleForm.value.blockHeight);
     this.sudokuService.setPuzzle(this.puzzleForm.value.puzzle);
 
     this.router.navigateByUrl('').then();
