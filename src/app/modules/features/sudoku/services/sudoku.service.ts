@@ -32,7 +32,6 @@ export class SudokuService implements OnDestroy {
     this.$size
       .pipe(takeUntil(this.$destroy))
       .subscribe((size: number) => {
-        console.warn("new size", size);
         this.inputModes.next([
           new ValueMode(size),
           new CornerMode(size),
