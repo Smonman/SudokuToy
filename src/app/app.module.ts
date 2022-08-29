@@ -6,6 +6,7 @@ import { SharedModule } from './modules/shared/shared.module';
 import { AppRoutingModule } from "./app-routing.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ReactiveFormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     NgbModule,
     SharedModule,
     AppRoutingModule,
+    CommonModule
   ],
   bootstrap: [AppComponent]
 })

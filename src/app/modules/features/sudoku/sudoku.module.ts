@@ -5,10 +5,8 @@ import { SudokuCellComponent } from './components/sudoku-cell/sudoku-cell.compon
 
 @NgModule({
   declarations: [SudokuComponent, SudokuCellComponent],
-  exports: [
-    SudokuComponent
-  ],
-  imports: [SharedModule]
+  imports: [SharedModule],
+  exports: [SudokuComponent],
 })
 export class SudokuModule {
 }

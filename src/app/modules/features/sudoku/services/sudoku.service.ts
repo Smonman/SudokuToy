@@ -4,6 +4,7 @@ import { InputMode } from "../../../shared/classes/input-mode";
 import { ValueMode } from "../classes/value-mode";
 import { CornerMode } from "../classes/corner-mode";
 import { CenterMode } from "../classes/center-mode";
+import { TimerService } from "../../timer/services/timer.service";
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class SudokuService implements OnDestroy {
   private curInputModeIndex = new BehaviorSubject<number>(0);
   private $destroy = new Subject<void>();
 
-  constructor() {
+  constructor(private timerService: TimerService) {
     this.$inputModes
       .pipe(takeUntil(this.$destroy))
       .subscribe(() => this.curInputMode.next(this.getInputModes()[this.getCurInputModeIndex()]));
@@ -37,6 +38,12 @@ export class SudokuService implements OnDestroy {
           new CornerMode(size),
           new CenterMode(size)
         ]);
+      });
+
+    this.$puzzle
+      .pipe(takeUntil(this.$destroy))
+      .subscribe(() => {
+        this.timerService.startTimer();
       });
   }
 
