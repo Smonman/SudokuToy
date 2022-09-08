@@ -1,12 +1,12 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { SudokuService } from "./services/sudoku.service";
-import { Subject, takeUntil } from "rxjs";
-import { InputMode } from "../../shared/classes/input-mode";
+import { SudokuService } from './services/sudoku.service';
+import { Subject, takeUntil } from 'rxjs';
+import { InputMode } from '../../shared/classes/input-mode';
 
 @Component({
   selector: 'app-sudoku',
   templateUrl: './sudoku.component.html',
-  styleUrls: ['./sudoku.component.css']
+  styleUrls: ['./sudoku.component.css'],
 })
 export class SudokuComponent implements OnInit, OnDestroy {
   public size: number = 0;

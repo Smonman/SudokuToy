@@ -4,7 +4,7 @@ const voidStyles: { [property: string]: string | number } = {
   opacity: 0,
   transform: 'scale(0)',
   margin: 0,
-  height: 0
+  height: 0,
 };
 const transitionDuration = 250;
 const transitionCurve = 'cubic-bezier(.42, 0, .09, 1)';
@@ -15,9 +15,9 @@ export const appearAnimations: AnimationTriggerMetadata = trigger('appear', [
   state('void', style(voidStyles)),
 
   transition(':enter', [
-    animate(`${transitionDuration}ms ${transitionDelay}ms ${transitionCurve}`)
+    animate(`${transitionDuration}ms ${transitionDelay}ms ${transitionCurve}`),
   ]),
   transition(':leave', [
-    animate(`${transitionDuration}ms ${transitionCurve}`, style(voidStyles))
-  ])
+    animate(`${transitionDuration}ms ${transitionCurve}`, style(voidStyles)),
+  ]),
 ]);

@@ -8,7 +8,7 @@ describe('SudokuCellComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SudokuCellComponent]
+      declarations: [SudokuCellComponent],
     })
       .compileComponents();
   });

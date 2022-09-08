@@ -1,12 +1,12 @@
 import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
-import { SudokuService } from "../../services/sudoku.service";
-import { Subject, takeUntil } from "rxjs";
-import { InputMode } from "../../../../shared/classes/input-mode";
+import { SudokuService } from '../../services/sudoku.service';
+import { Subject, takeUntil } from 'rxjs';
+import { InputMode } from '../../../../shared/classes/input-mode';
 
 @Component({
   selector: 'app-sudoku-cell',
   templateUrl: './sudoku-cell.component.html',
-  styleUrls: ['./sudoku-cell.component.css']
+  styleUrls: ['./sudoku-cell.component.css'],
 })
 export class SudokuCellComponent implements OnInit, OnDestroy {
   @Input() row: number = 0;
@@ -35,7 +35,7 @@ export class SudokuCellComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.$destroy))
       .subscribe((ims: InputMode[]) => {
         this.inputModes = ims;
-      })
+      });
 
     this.sudokuService.$curInputMode
       .pipe(takeUntil(this.$destroy))
@@ -77,7 +77,7 @@ export class SudokuCellComponent implements OnInit, OnDestroy {
   @HostListener('mouseup', ['$event'])
   updateSelected(e: MouseEvent): void {
     if (e.ctrlKey) {
-      this.sudokuService.updateSelectedCellId(this.id)
+      this.sudokuService.updateSelectedCellId(this.id);
       this.sudokuService.setHighlightedCellIds([]);
     } else {
       this.sudokuService.setSelectedCellIds([this.id]);

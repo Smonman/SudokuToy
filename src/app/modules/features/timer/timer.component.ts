@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TimerService } from "./services/timer.service";
-import { interval, Subject, Subscription, takeUntil } from "rxjs";
+import { TimerService } from './services/timer.service';
+import { interval, Subject, Subscription, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-timer',
   templateUrl: './timer.component.html',
-  styleUrls: ['./timer.component.css']
+  styleUrls: ['./timer.component.css'],
 })
 export class TimerComponent implements OnInit, OnDestroy {
 

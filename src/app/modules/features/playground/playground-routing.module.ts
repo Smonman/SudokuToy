@@ -5,13 +5,13 @@ import { PlaygroundComponent } from './playground.component';
 const routes: Routes = [
   {
     path: '',
-    component: PlaygroundComponent
-  }
+    component: PlaygroundComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class PlaygroundRoutingModule {
 }

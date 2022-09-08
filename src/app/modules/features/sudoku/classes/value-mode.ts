@@ -1,7 +1,7 @@
-import { SimpleInputMode } from "../../../shared/classes/input-mode";
+import { SimpleInputMode } from '../../../shared/classes/input-mode';
 
 export class ValueMode extends SimpleInputMode {
   constructor(size: number) {
-    super("value", [].constructor(size * size).fill(null));
+    super('value', [].constructor(size * size).fill(null));
   }
 }

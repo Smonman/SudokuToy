@@ -1,13 +1,13 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, takeUntil } from "rxjs";
-import { InputMode } from "../../../shared/classes/input-mode";
-import { ValueMode } from "../classes/value-mode";
-import { CornerMode } from "../classes/corner-mode";
-import { CenterMode } from "../classes/center-mode";
-import { TimerService } from "../../timer/services/timer.service";
+import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
+import { InputMode } from '../../../shared/classes/input-mode';
+import { ValueMode } from '../classes/value-mode';
+import { CornerMode } from '../classes/corner-mode';
+import { CenterMode } from '../classes/center-mode';
+import { TimerService } from '../../timer/services/timer.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SudokuService implements OnDestroy {
   private size = new BehaviorSubject<number>(9);
@@ -36,7 +36,7 @@ export class SudokuService implements OnDestroy {
         this.inputModes.next([
           new ValueMode(size),
           new CornerMode(size),
-          new CenterMode(size)
+          new CenterMode(size),
         ]);
       });
 

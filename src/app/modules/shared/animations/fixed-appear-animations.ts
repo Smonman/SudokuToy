@@ -15,10 +15,10 @@ export const fixedAppearAnimations: AnimationTriggerMetadata = trigger(
     state('void', style(voidStyles)),
 
     transition(':enter', [
-      animate(`${transitionDuration}ms ${transitionDelay}ms ${transitionCurve}`)
+      animate(`${transitionDuration}ms ${transitionDelay}ms ${transitionCurve}`),
     ]),
     transition(':leave', [
-      animate(`${transitionDuration}ms ${transitionCurve}`, style(voidStyles))
-    ])
-  ]
+      animate(`${transitionDuration}ms ${transitionCurve}`, style(voidStyles)),
+    ]),
+  ],
 );

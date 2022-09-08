@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'seconds'
+  name: 'seconds',
 })
 export class SecondsPipe implements PipeTransform {
 
@@ -10,6 +10,6 @@ export class SecondsPipe implements PipeTransform {
     const hours: number = Math.floor(minutes / 60);
     const remainingMinutes: number = minutes - hours * 60;
     const remainingSeconds: number = seconds - remainingMinutes * 60;
-    return `${hours.toString().padStart(2, "0")}:${remainingMinutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
+    return `${hours.toString().padStart(2, '0')}:${remainingMinutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
   }
 }

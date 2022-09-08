@@ -8,7 +8,7 @@ describe('PuzzleLoaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PuzzleLoaderComponent]
+      declarations: [PuzzleLoaderComponent],
     })
       .compileComponents();
   });

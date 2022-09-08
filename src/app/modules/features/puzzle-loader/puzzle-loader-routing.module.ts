@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from "@angular/router";
-import { PuzzleLoaderComponent } from "./puzzle-loader.component";
+import { RouterModule, Routes } from '@angular/router';
+import { PuzzleLoaderComponent } from './puzzle-loader.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: PuzzleLoaderComponent
+    component: PuzzleLoaderComponent,
   },
-  {path: '**', redirectTo: ''}
+  {path: '**', redirectTo: ''},
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class PuzzleLoaderRoutingModule {
 }

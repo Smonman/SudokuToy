@@ -8,7 +8,7 @@ describe('PageLayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PageLayoutComponent]
+      declarations: [PageLayoutComponent],
     })
       .compileComponents();
   });
