@@ -4,7 +4,6 @@ import { SudokuService } from '../sudoku/services/sudoku.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormBase } from '../../shared/classes/form-base';
-import { isInteger, toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 @Component({
   selector: 'app-puzzle-loader',
@@ -30,7 +29,7 @@ export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy
       .pipe(takeUntil(this.$destroy))
       .subscribe((change) => {
         const possiblePuzzleSize = Math.sqrt(change.trim().length);
-        if (isInteger(possiblePuzzleSize)) {
+        if (Number.isInteger(possiblePuzzleSize)) {
           this.puzzleForm.controls['puzzleSize'].patchValue(possiblePuzzleSize);
         } else {
           this.puzzleForm.controls['puzzleSize'].patchValue(null);
@@ -40,8 +39,8 @@ export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy
     this.puzzleForm.controls['puzzleSize'].valueChanges
       .pipe(takeUntil(this.$destroy))
       .subscribe((change) => {
-        const possibleBlockSize = Math.sqrt(toInteger(change));
-        if (isInteger(possibleBlockSize)) {
+        const possibleBlockSize = Math.sqrt(Number(change));
+        if (Number.isInteger(possibleBlockSize)) {
           this.puzzleForm.controls['blockWidth'].patchValue(possibleBlockSize);
           this.puzzleForm.controls['blockHeight'].patchValue(possibleBlockSize);
         } else {
