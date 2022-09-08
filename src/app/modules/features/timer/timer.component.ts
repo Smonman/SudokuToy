@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TimerService } from "./services/timer.service";
-import { Subject, takeUntil } from "rxjs";
+import { interval, Subject, Subscription, takeUntil } from "rxjs";
 
 @Component({
   selector: 'app-timer',
@@ -14,30 +14,26 @@ export class TimerComponent implements OnInit, OnDestroy {
   public isStopped: boolean = false;
   public curTime: number = 0;
   private $destroy = new Subject<void>();
-  private intervalId: number = -1;
+  private intervalTimer = interval(1000);
+  private subscription: Subscription = new Subscription();
 
   constructor(private timerService: TimerService) {
   }
 
   ngOnInit(): void {
-    this.timerService.$start
-      .pipe(takeUntil(this.$destroy))
-      .subscribe(() => {
-        this.intervalId = window.setInterval(() => {
-          this.curTime += 1;
-        }, 1000);
-      });
+
+    // the order of these subscriptions is important
 
     this.timerService.$pause
       .pipe(takeUntil(this.$destroy))
       .subscribe(() => {
-        window.clearInterval(this.intervalId);
+        this.subscription.unsubscribe();
       });
 
     this.timerService.$stop
       .pipe(takeUntil(this.$destroy))
       .subscribe(() => {
-        window.clearInterval(this.intervalId);
+        this.subscription.unsubscribe();
       });
 
     this.timerService.$reset
@@ -46,10 +42,14 @@ export class TimerComponent implements OnInit, OnDestroy {
         this.curTime = 0;
       });
 
-    this.timerService.$isRunning
+    this.timerService.$start
       .pipe(takeUntil(this.$destroy))
-      .subscribe((isRunning: boolean) => {
-        this.isRunning = isRunning;
+      .subscribe(() => {
+        this.subscription = this.intervalTimer
+          .pipe(takeUntil(this.$destroy))
+          .subscribe(() => {
+            this.curTime += 1;
+          });
       });
 
     this.timerService.$isPaused
@@ -62,6 +62,12 @@ export class TimerComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.$destroy))
       .subscribe((isStopped: boolean) => {
         this.isStopped = isStopped;
+      });
+
+    this.timerService.$isRunning
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((isRunning: boolean) => {
+        this.isRunning = isRunning;
       });
   }
 

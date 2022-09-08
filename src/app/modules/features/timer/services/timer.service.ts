@@ -6,10 +6,10 @@ import { BehaviorSubject, Observable, ReplaySubject } from "rxjs";
 })
 export class TimerService {
 
-  private start = new ReplaySubject<void>();
-  private pause = new ReplaySubject<void>();
-  private stop = new ReplaySubject<void>();
-  private reset = new ReplaySubject<void>();
+  private start = new ReplaySubject<void>(1);
+  private pause = new ReplaySubject<void>(1);
+  private stop = new ReplaySubject<void>(1);
+  private reset = new ReplaySubject<void>(1);
   private isRunning = new BehaviorSubject<boolean>(false);
   private isPaused = new BehaviorSubject<boolean>(false);
   private isStopped = new BehaviorSubject<boolean>(false);

@@ -43,6 +43,8 @@ export class SudokuService implements OnDestroy {
     this.$puzzle
       .pipe(takeUntil(this.$destroy))
       .subscribe(() => {
+        this.timerService.stopTimer();
+        this.timerService.resetTimer();
         this.timerService.startTimer();
       });
   }
