@@ -1,9 +1,9 @@
 import { FormGroup } from '@angular/forms';
 
 export abstract class FormBase {
-  form: FormGroup | null = null;
-  submitted = false;
-  loading = false;
+  public form: FormGroup = new FormGroup({});
+  public submitted = false;
+  public loading = false;
 
   protected constructor() {
   }
@@ -11,17 +11,18 @@ export abstract class FormBase {
   submit(): void {
     this.submitted = true;
     if (this.form?.valid) {
+      const formValue = this.form.value;
       this.setLoading(true);
-      this.onValidSubmit();
+      this.onValidSubmit(formValue);
     }
   }
 
   setLoading(loading: boolean): void {
     this.loading = loading;
     if (this.loading) {
-      this.form?.disable();
+      this.form.disable();
     } else {
-      this.form?.enable();
+      this.form.enable();
     }
   }
 
@@ -39,5 +40,5 @@ export abstract class FormBase {
     return this.submitted && field?.invalid && (errorName ? field?.errors?.[errorName] : true);
   }
 
-  protected abstract onValidSubmit(): void;
+  protected abstract onValidSubmit(formValue: any): void;
 }

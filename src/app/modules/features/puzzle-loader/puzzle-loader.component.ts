@@ -12,12 +12,6 @@ import { FormBase } from '../../shared/classes/form-base';
 })
 export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy {
 
-  puzzleForm = new FormGroup({
-    puzzle: new FormControl('', [Validators.pattern('[\\.123456789 ]*')]),
-    puzzleSize: new FormControl(null, [Validators.required, Validators.min(1)]),
-    blockWidth: new FormControl(null, [Validators.required, Validators.min(1)]),
-    blockHeight: new FormControl(null, [Validators.required, Validators.min(1)]),
-  });
   private $destroy = new Subject<void>();
 
   constructor(private sudokuService: SudokuService, private router: Router) {
@@ -25,27 +19,34 @@ export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy
   }
 
   ngOnInit(): void {
-    this.puzzleForm.controls['puzzle'].valueChanges
+    this.form = new FormGroup({
+      puzzle: new FormControl('', [Validators.pattern('[\\.0123456789 ]*')]),
+      puzzleSize: new FormControl(null, [Validators.required, Validators.min(1)]),
+      blockWidth: new FormControl(null, [Validators.required, Validators.min(1)]),
+      blockHeight: new FormControl(null, [Validators.required, Validators.min(1)]),
+    });
+
+    this.form.controls['puzzle'].valueChanges
       .pipe(takeUntil(this.$destroy))
       .subscribe((change) => {
         const possiblePuzzleSize = Math.sqrt(change.trim().length);
         if (Number.isInteger(possiblePuzzleSize)) {
-          this.puzzleForm.controls['puzzleSize'].patchValue(possiblePuzzleSize);
+          this.form.controls['puzzleSize'].patchValue(possiblePuzzleSize);
         } else {
-          this.puzzleForm.controls['puzzleSize'].patchValue(null);
+          this.form.controls['puzzleSize'].patchValue(null);
         }
       });
 
-    this.puzzleForm.controls['puzzleSize'].valueChanges
+    this.form.controls['puzzleSize'].valueChanges
       .pipe(takeUntil(this.$destroy))
       .subscribe((change) => {
         const possibleBlockSize = Math.sqrt(Number(change));
         if (Number.isInteger(possibleBlockSize)) {
-          this.puzzleForm.controls['blockWidth'].patchValue(possibleBlockSize);
-          this.puzzleForm.controls['blockHeight'].patchValue(possibleBlockSize);
+          this.form.controls['blockWidth'].patchValue(possibleBlockSize);
+          this.form.controls['blockHeight'].patchValue(possibleBlockSize);
         } else {
-          this.puzzleForm.controls['blockWidth'].patchValue(null);
-          this.puzzleForm.controls['blockHeight'].patchValue(null);
+          this.form.controls['blockWidth'].patchValue(null);
+          this.form.controls['blockHeight'].patchValue(null);
         }
       });
   }
@@ -55,13 +56,13 @@ export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy
     this.$destroy.complete();
   }
 
-  protected onValidSubmit(): void {
-    this.sudokuService.setSize(this.puzzleForm.value.puzzleSize);
-    this.sudokuService.setBlockWidth(this.puzzleForm.value.blockWidth);
-    this.sudokuService.setBlockHeight(this.puzzleForm.value.blockHeight);
-    this.sudokuService.setHorizontalBlockCount(this.puzzleForm.value.puzzleSize / this.puzzleForm.value.blockWidth);
-    this.sudokuService.setVerticalBlockCount(this.puzzleForm.value.puzzleSize / this.puzzleForm.value.blockHeight);
-    this.sudokuService.setPuzzle(this.puzzleForm.value.puzzle);
+  protected onValidSubmit(formValue: any): void {
+    this.sudokuService.setSize(formValue.puzzleSize);
+    this.sudokuService.setBlockWidth(formValue.blockWidth);
+    this.sudokuService.setBlockHeight(formValue.blockHeight);
+    this.sudokuService.setHorizontalBlockCount(formValue.puzzleSize / formValue.blockWidth);
+    this.sudokuService.setVerticalBlockCount(formValue.puzzleSize / formValue.blockHeight);
+    this.sudokuService.setPuzzle(formValue.puzzle);
     this.router.navigateByUrl('').then();
   }
 }
