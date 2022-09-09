@@ -13,6 +13,14 @@
             <label class="form-label" for="puzzleSize-input">Size:</label>
             <input class="form-control" formControlName="puzzleSize" id="puzzleSize-input" name="puzzleSize"
                    type="number">
+            <app-form-errors>
+              <app-form-error *ngIf="fieldHasErrors('puzzleSize', 'required')">
+                the puzzle size is required
+              </app-form-error>
+              <app-form-error *ngIf="fieldHasErrors('puzzleSize', 'min')">
+                the puzzle size has to be larger than 1
+              </app-form-error>
+            </app-form-errors>
           </div>
         </div>
         <div class="row mb-3">
@@ -20,11 +28,27 @@
             <label class="form-label" for="blockWidth-input">Block Width:</label>
             <input class="form-control" formControlName="blockWidth" id="blockWidth-input" name="blockWidth"
                    type="number">
+            <app-form-errors>
+              <app-form-error *ngIf="fieldHasErrors('blockWidth', 'required')">
+                the block width is required
+              </app-form-error>
+              <app-form-error *ngIf="fieldHasErrors('blockWidth', 'min')">
+                the block width has to be larger than 0
+              </app-form-error>
+            </app-form-errors>
           </div>
           <div class="col">
             <label class="form-label" for="blockHeight-input">Block Height:</label>
             <input class="form-control" formControlName="blockHeight" id="blockHeight-input" name="blockHeight"
                    type="number">
+            <app-form-errors>
+              <app-form-error *ngIf="fieldHasErrors('blockHeight', 'required')">
+                the block height is required
+              </app-form-error>
+              <app-form-error *ngIf="fieldHasErrors('blockHeight', 'min')">
+                the block height has to be larger than 0
+              </app-form-error>
+            </app-form-errors>
           </div>
         </div>
         <button class="btn btn-primary" type="submit">Load Puzzle</button>

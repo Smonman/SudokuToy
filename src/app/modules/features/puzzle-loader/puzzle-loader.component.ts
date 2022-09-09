@@ -21,7 +21,7 @@ export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy
   ngOnInit(): void {
     this.form = new FormGroup({
       puzzle: new FormControl('', [Validators.pattern('[\\.0123456789 ]*')]),
-      puzzleSize: new FormControl(null, [Validators.required, Validators.min(1)]),
+      puzzleSize: new FormControl(null, [Validators.required, Validators.min(2)]),
       blockWidth: new FormControl(null, [Validators.required, Validators.min(1)]),
       blockHeight: new FormControl(null, [Validators.required, Validators.min(1)]),
     });
