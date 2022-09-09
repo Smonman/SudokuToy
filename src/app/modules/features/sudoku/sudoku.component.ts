@@ -10,10 +10,10 @@ import { InputMode } from '../../shared/classes/input-mode';
 })
 export class SudokuComponent implements OnInit, OnDestroy {
   public size: number = 0;
-  public blockWidth: number = 0;
-  public blockHeight: number = 0;
-  public verticalBlockCount: number = 0;
-  public horizontalBlockCount: number = 0;
+  public boxWidth: number = 0;
+  public boxHeight: number = 0;
+  public verticalBoxCount: number = 0;
+  public horizontalBoxCount: number = 0;
   public curInputMode: InputMode | null = null;
   public curInputModeIndex: number = 0;
 
@@ -27,21 +27,21 @@ export class SudokuComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.$destroy))
       .subscribe((size: number) => this.size = size);
 
-    this.sudokuService.$blockWidth
+    this.sudokuService.$boxWidth
       .pipe(takeUntil(this.$destroy))
-      .subscribe((blockWidth: number) => this.blockWidth = blockWidth);
+      .subscribe((boxWidth: number) => this.boxWidth = boxWidth);
 
-    this.sudokuService.$blockHeight
+    this.sudokuService.$boxHeight
       .pipe(takeUntil(this.$destroy))
-      .subscribe((blockHeight: number) => this.blockHeight = blockHeight);
+      .subscribe((boxHeight: number) => this.boxHeight = boxHeight);
 
-    this.sudokuService.$verticalBlockCount
+    this.sudokuService.$verticalBoxCount
       .pipe(takeUntil(this.$destroy))
-      .subscribe((verticalBlockCount: number) => this.verticalBlockCount = verticalBlockCount);
+      .subscribe((verticalBoxCount: number) => this.verticalBoxCount = verticalBoxCount);
 
-    this.sudokuService.$horizontalBlockCount
+    this.sudokuService.$horizontalBoxCount
       .pipe(takeUntil(this.$destroy))
-      .subscribe((horizontalBlockCount: number) => this.horizontalBlockCount = horizontalBlockCount);
+      .subscribe((horizontalBoxCount: number) => this.horizontalBoxCount = horizontalBoxCount);
 
     this.sudokuService.$curInputModeIndex
       .pipe(takeUntil(this.$destroy))

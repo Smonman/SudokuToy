@@ -11,10 +11,10 @@ import { TimerService } from '../../timer/services/timer.service';
 })
 export class SudokuService implements OnDestroy {
   private size = new BehaviorSubject<number>(9);
-  private verticalBlockCount = new BehaviorSubject<number>(3);
-  private horizontalBlockCount = new BehaviorSubject<number>(3);
-  private blockWidth = new BehaviorSubject<number>(3);
-  private blockHeight = new BehaviorSubject<number>(3);
+  private verticalBoxCount = new BehaviorSubject<number>(3);
+  private horizontalBoxCount = new BehaviorSubject<number>(3);
+  private boxWidth = new BehaviorSubject<number>(3);
+  private boxHeight = new BehaviorSubject<number>(3);
   private selectedCellIds = new BehaviorSubject<number[]>([]);
   private highlightedCellIds = new BehaviorSubject<number[]>([]);
   private puzzle = new BehaviorSubject<string | null>(null);
@@ -53,20 +53,20 @@ export class SudokuService implements OnDestroy {
     return this.size.asObservable();
   }
 
-  get $verticalBlockCount(): Observable<number> {
-    return this.verticalBlockCount.asObservable();
+  get $verticalBoxCount(): Observable<number> {
+    return this.verticalBoxCount.asObservable();
   }
 
-  get $horizontalBlockCount(): Observable<number> {
-    return this.horizontalBlockCount.asObservable();
+  get $horizontalBoxCount(): Observable<number> {
+    return this.horizontalBoxCount.asObservable();
   }
 
-  get $blockWidth(): Observable<number> {
-    return this.blockWidth.asObservable();
+  get $boxWidth(): Observable<number> {
+    return this.boxWidth.asObservable();
   }
 
-  get $blockHeight(): Observable<number> {
-    return this.blockHeight.asObservable();
+  get $boxHeight(): Observable<number> {
+    return this.boxHeight.asObservable();
   }
 
   get $selectedCellIds(): Observable<number[]> {
@@ -106,20 +106,20 @@ export class SudokuService implements OnDestroy {
     return this.size.getValue();
   }
 
-  getVerticalBlockCount(): number {
-    return this.verticalBlockCount.getValue();
+  getVerticalBoxCount(): number {
+    return this.verticalBoxCount.getValue();
   }
 
-  getHorizontalBlockCount(): number {
-    return this.horizontalBlockCount.getValue();
+  getHorizontalBoxCount(): number {
+    return this.horizontalBoxCount.getValue();
   }
 
-  getBlockWidth(): number {
-    return this.blockWidth.getValue();
+  getBoxWidth(): number {
+    return this.boxWidth.getValue();
   }
 
-  getBlockHeight(): number {
-    return this.blockHeight.getValue();
+  getBoxHeight(): number {
+    return this.boxHeight.getValue();
   }
 
   getCurInputModeIndex(): number {
@@ -134,20 +134,20 @@ export class SudokuService implements OnDestroy {
     this.size.next(value);
   }
 
-  setVerticalBlockCount(value: number): void {
-    this.verticalBlockCount.next(value);
+  setVerticalBoxCount(value: number): void {
+    this.verticalBoxCount.next(value);
   }
 
-  setHorizontalBlockCount(value: number): void {
-    this.horizontalBlockCount.next(value);
+  setHorizontalBoxCount(value: number): void {
+    this.horizontalBoxCount.next(value);
   }
 
-  setBlockWidth(value: number): void {
-    this.blockWidth.next(value);
+  setBoxWidth(value: number): void {
+    this.boxWidth.next(value);
   }
 
-  setBlockHeight(value: number): void {
-    this.blockHeight.next(value);
+  setBoxHeight(value: number): void {
+    this.boxHeight.next(value);
   }
 
   setSelectedCellIds(cellIds: number[]): void {
@@ -187,8 +187,8 @@ export class SudokuService implements OnDestroy {
     return row * this.getSize() + col;
   }
 
-  computeBlockId(row: number, col: number): number {
-    return Math.floor(row / this.getBlockHeight()) * this.getHorizontalBlockCount() + Math.floor(col / this.getBlockWidth());
+  computeBoxId(row: number, col: number): number {
+    return Math.floor(row / this.getBoxHeight()) * this.getHorizontalBoxCount() + Math.floor(col / this.getBoxWidth());
   }
 
   updateSelectedCellId(id: number): void {

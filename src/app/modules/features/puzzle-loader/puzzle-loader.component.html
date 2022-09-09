@@ -25,28 +25,28 @@
         </div>
         <div class="row mb-3">
           <div class="col">
-            <label class="form-label" for="blockWidth-input">Block Width:</label>
-            <input class="form-control" formControlName="blockWidth" id="blockWidth-input" name="blockWidth"
+            <label class="form-label" for="boxWidth-input">Box Width:</label>
+            <input class="form-control" formControlName="boxWidth" id="boxWidth-input" name="boxWidth"
                    type="number">
             <app-form-errors>
-              <app-form-error *ngIf="fieldHasErrors('blockWidth', 'required')">
-                the block width is required
+              <app-form-error *ngIf="fieldHasErrors('boxWidth', 'required')">
+                the box width is required
               </app-form-error>
-              <app-form-error *ngIf="fieldHasErrors('blockWidth', 'min')">
-                the block width has to be larger than 0
+              <app-form-error *ngIf="fieldHasErrors('boxWidth', 'min')">
+                the box width has to be larger than 0
               </app-form-error>
             </app-form-errors>
           </div>
           <div class="col">
-            <label class="form-label" for="blockHeight-input">Block Height:</label>
-            <input class="form-control" formControlName="blockHeight" id="blockHeight-input" name="blockHeight"
+            <label class="form-label" for="boxHeight-input">Box Height:</label>
+            <input class="form-control" formControlName="boxHeight" id="boxHeight-input" name="boxHeight"
                    type="number">
             <app-form-errors>
-              <app-form-error *ngIf="fieldHasErrors('blockHeight', 'required')">
-                the block height is required
+              <app-form-error *ngIf="fieldHasErrors('boxHeight', 'required')">
+                the box height is required
               </app-form-error>
-              <app-form-error *ngIf="fieldHasErrors('blockHeight', 'min')">
-                the block height has to be larger than 0
+              <app-form-error *ngIf="fieldHasErrors('boxHeight', 'min')">
+                the box height has to be larger than 0
               </app-form-error>
             </app-form-errors>
           </div>

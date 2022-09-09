@@ -13,7 +13,7 @@ export class SudokuCellComponent implements OnInit, OnDestroy {
   @Input() col: number = 0;
 
   public id: number = 0;
-  public blockId: number = 0;
+  public boxId: number = 0;
   public sudokuSize: number = 0;
   public selected: boolean = false;
   public highlighted: boolean = false;
@@ -29,7 +29,7 @@ export class SudokuCellComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sudokuSize = this.sudokuService.getSize();
     this.id = this.sudokuService.computeCellId(this.row, this.col);
-    this.blockId = this.sudokuService.computeBlockId(this.row, this.col);
+    this.boxId = this.sudokuService.computeBoxId(this.row, this.col);
 
     this.sudokuService.$inputModes
       .pipe(takeUntil(this.$destroy))

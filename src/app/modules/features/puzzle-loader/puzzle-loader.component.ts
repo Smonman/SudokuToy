@@ -22,8 +22,8 @@ export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy
     this.form = new FormGroup({
       puzzle: new FormControl('', [Validators.pattern('[\\.0123456789 ]*')]),
       puzzleSize: new FormControl(null, [Validators.required, Validators.min(2)]),
-      blockWidth: new FormControl(null, [Validators.required, Validators.min(1)]),
-      blockHeight: new FormControl(null, [Validators.required, Validators.min(1)]),
+      boxWidth: new FormControl(null, [Validators.required, Validators.min(1)]),
+      boxHeight: new FormControl(null, [Validators.required, Validators.min(1)]),
     });
 
     this.form.controls['puzzle'].valueChanges
@@ -40,13 +40,13 @@ export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy
     this.form.controls['puzzleSize'].valueChanges
       .pipe(takeUntil(this.$destroy))
       .subscribe((change) => {
-        const possibleBlockSize = Math.sqrt(Number(change));
-        if (Number.isInteger(possibleBlockSize)) {
-          this.form.controls['blockWidth'].patchValue(possibleBlockSize);
-          this.form.controls['blockHeight'].patchValue(possibleBlockSize);
+        const possibleBoxSize = Math.sqrt(Number(change));
+        if (Number.isInteger(possibleBoxSize)) {
+          this.form.controls['boxWidth'].patchValue(possibleBoxSize);
+          this.form.controls['boxHeight'].patchValue(possibleBoxSize);
         } else {
-          this.form.controls['blockWidth'].patchValue(null);
-          this.form.controls['blockHeight'].patchValue(null);
+          this.form.controls['boxWidth'].patchValue(null);
+          this.form.controls['boxHeight'].patchValue(null);
         }
       });
   }
@@ -58,10 +58,10 @@ export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy
 
   protected onValidSubmit(formValue: any): void {
     this.sudokuService.setSize(formValue.puzzleSize);
-    this.sudokuService.setBlockWidth(formValue.blockWidth);
-    this.sudokuService.setBlockHeight(formValue.blockHeight);
-    this.sudokuService.setHorizontalBlockCount(formValue.puzzleSize / formValue.blockWidth);
-    this.sudokuService.setVerticalBlockCount(formValue.puzzleSize / formValue.blockHeight);
+    this.sudokuService.setBoxWidth(formValue.boxWidth);
+    this.sudokuService.setBoxHeight(formValue.boxHeight);
+    this.sudokuService.setHorizontalBoxCount(formValue.puzzleSize / formValue.boxWidth);
+    this.sudokuService.setVerticalBoxCount(formValue.puzzleSize / formValue.boxHeight);
     this.sudokuService.setPuzzle(formValue.puzzle);
     this.router.navigateByUrl('').then();
   }
