@@ -32,7 +32,11 @@ export abstract class FormBase {
   }
 
   hasError(errorName?: string): boolean {
-    return (this.submitted) && ((errorName ? this.form?.errors?.[errorName] : this.form?.invalid) || false);
+    if (errorName) {
+      return (this.form?.errors?.[errorName] != null || false) && (this.submitted);
+    } else {
+      return (this.form?.invalid || false) && (this.submitted);
+    }
   }
 
   fieldHasErrors(fieldName: string, errorName?: string): boolean {

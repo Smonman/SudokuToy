@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { SudokuService } from '../sudoku/services/sudoku.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
@@ -19,11 +19,29 @@ export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy
   }
 
   ngOnInit(): void {
-    this.form = new UntypedFormGroup({
-      puzzle: new UntypedFormControl('', [Validators.pattern('[\\.0123456789 ]*')]),
-      puzzleSize: new UntypedFormControl(null, [Validators.required, Validators.min(2)]),
-      boxWidth: new UntypedFormControl(null, [Validators.required, Validators.min(1)]),
-      boxHeight: new UntypedFormControl(null, [Validators.required, Validators.min(1)]),
+    this.form = new FormGroup({
+      puzzle: new FormControl<string | null>('', [
+        Validators.pattern('[\\.0123456789 ]*'),
+      ]),
+      puzzleSize: new FormControl<number | null>(null, [
+        Validators.required,
+        Validators.min(2),
+      ]),
+      boxWidth: new FormControl<number | null>(null, [
+        Validators.required,
+        Validators.min(1),
+      ]),
+      boxHeight: new FormControl<number | null>(null, [
+        Validators.required,
+        Validators.min(1),
+      ]),
+    }, {
+      validators: [
+        validateMaxBoxSize('puzzleSize', 'boxWidth'),
+        validateMaxBoxSize('puzzleSize', 'boxHeight'),
+        validateDivisibleBoxSize('puzzleSize', 'boxWidth'),
+        validateDivisibleBoxSize('puzzleSize', 'boxHeight'),
+      ],
     });
 
     this.form.controls['puzzle'].valueChanges
@@ -65,4 +83,36 @@ export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy
     this.sudokuService.setPuzzle(formValue.puzzle);
     this.router.navigateByUrl('').then();
   }
+}
+
+export function validateDivisibleBoxSize(puzzleSizeControlName: string, boxSizeControlName: string): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const form = control as FormGroup;
+    const size = Number(form.get(puzzleSizeControlName)?.value);
+    const boxSize = Number(form.get(boxSizeControlName)?.value);
+    if (Number.isInteger(size / boxSize)) {
+      return null;
+    } else {
+      if (boxSize > 0 && boxSize <= size) {
+        form.get(boxSizeControlName)?.setErrors({validateDivisibleBoxSize: {valid: false}});
+        return {validateDivisibleBoxSize: {valid: false, controlName: boxSizeControlName}};
+      } else {
+        return null;
+      }
+    }
+  };
+}
+
+export function validateMaxBoxSize(puzzleSizeControlName: string, boxSizeControlName: string): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const form = control as FormGroup;
+    const size = Number(form.get(puzzleSizeControlName)?.value);
+    const boxSize = Number(form.get(boxSizeControlName)?.value);
+    if (size >= boxSize) {
+      return null;
+    } else {
+      form.get(boxSizeControlName)?.setErrors({validateMaxBoxSize: {valid: false}});
+      return {validateMaxBoxSize: {valid: false, controlName: boxSizeControlName}};
+    }
+  };
 }

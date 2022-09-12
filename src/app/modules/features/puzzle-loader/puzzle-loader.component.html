@@ -35,6 +35,12 @@
               <app-form-error *ngIf="fieldHasErrors('boxWidth', 'min')">
                 the box width has to be larger than 0
               </app-form-error>
+              <app-form-error *ngIf="fieldHasErrors('boxWidth', 'validateDivisibleBoxSize')">
+                this box width is not valid
+              </app-form-error>
+              <app-form-error *ngIf="fieldHasErrors('boxWidth', 'validateMaxBoxSize')">
+                this box width must be smaller than the puzzle size
+              </app-form-error>
             </app-form-errors>
           </div>
           <div class="col">
@@ -47,6 +53,12 @@
               </app-form-error>
               <app-form-error *ngIf="fieldHasErrors('boxHeight', 'min')">
                 the box height has to be larger than 0
+              </app-form-error>
+              <app-form-error *ngIf="fieldHasErrors('boxHeight', 'validateDivisibleBoxSize')">
+                this box height is not valid
+              </app-form-error>
+              <app-form-error *ngIf="fieldHasErrors('boxHeight', 'validateMaxBoxSize')">
+                this box height must be smaller than the puzzle size
               </app-form-error>
             </app-form-errors>
           </div>
