@@ -7,6 +7,7 @@ import { SecondsPipe } from './pipes/seconds.pipe';
 import { FormErrorsComponent } from './components/form-errors/form-errors.component';
 import { FormErrorComponent } from './components/form-errors/form-error/form-error.component';
 import { exclamationDiamond, github, heartFill, NgxBootstrapIconsModule, questionCircle } from 'ngx-bootstrap-icons';
+import { ReactiveButtonComponent } from './components/reactive-button/reactive-button.component';
 
 const icons = {
   heartFill,
@@ -20,6 +21,7 @@ const sharedDeclarations = [
   SecondsPipe,
   FormErrorsComponent,
   FormErrorComponent,
+  ReactiveButtonComponent,
 ];
 
 const sharedImports = [
