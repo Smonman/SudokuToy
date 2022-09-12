@@ -2,11 +2,13 @@ import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core
 import { SudokuService } from '../../services/sudoku.service';
 import { Subject, takeUntil } from 'rxjs';
 import { InputMode } from '../../../../shared/classes/input-mode';
+import { lightAppearAnimation } from '../../../../shared/animations/light-appear.animation';
 
 @Component({
   selector: 'app-sudoku-cell',
   templateUrl: './sudoku-cell.component.html',
   styleUrls: ['./sudoku-cell.component.css'],
+  animations: [lightAppearAnimation],
 })
 export class SudokuCellComponent implements OnInit, OnDestroy {
   @Input() row: number = 0;

@@ -6,6 +6,7 @@
        class="position-absolute top-0 start-0 w-100 h-100 bg-opacity-10 bg-primary"></div>
   <ng-container *ngIf="inputModes[0].value[id] != null">
     <div
+      @lightAppear
       [class.text-primary]="!readonly"
       class="d-flex flex-column align-items-center justify-content-around h3 p-2 m-0">
       {{inputModes[0].value[id]}}

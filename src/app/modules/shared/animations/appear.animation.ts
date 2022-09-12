@@ -7,7 +7,7 @@ const voidStyles: { [property: string]: string | number } = {
   height: 0,
 };
 const transitionDuration = 250;
-const transitionCurve = 'cubic-bezier(.42, 0, .09, 1)';
+const transitionCurve = 'cubic-bezier(0.4, 0, .1, 1)';
 const transitionDelay = 0;
 
 /** Animations, that an element fades in and scales up out of nowhere. */
