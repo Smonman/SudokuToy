@@ -8,9 +8,9 @@ describe('ReactiveButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReactiveButtonComponent ]
+      declarations: [ReactiveButtonComponent],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ReactiveButtonComponent);
     component = fixture.componentInstance;
