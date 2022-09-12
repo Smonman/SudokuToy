@@ -11,7 +11,7 @@ const transitionCurve = 'cubic-bezier(.42, 0, .09, 1)';
 const transitionDelay = 0;
 
 /** Animations, that an element fades in and scales up a bit. */
-export const lightAppearAnimations: AnimationTriggerMetadata = trigger(
+export const lightAppearAnimation: AnimationTriggerMetadata = trigger(
   'lightAppear',
   [
     state('void', style(voidStyles)),

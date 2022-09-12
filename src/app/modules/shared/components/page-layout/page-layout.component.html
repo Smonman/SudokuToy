@@ -17,23 +17,24 @@
     </div>
   </nav>
 </header>
-<main class="w-100 p-5 d-flex flex-column">
-  <div @fixedAppear class="wrapper w-100 d-flex flex-column flex-grow-1">
-    <div class="container">
+<div class="container">
+  <main @fixedAppear class="d-flex flex-column my-5">
+    <div class="d-flex flex-column flex-grow-1">
       <ng-content></ng-content>
     </div>
-  </div>
-</main>
-<footer>
-  <div class="w-100 p-2 d-flex flex-column align-items-center">
-    <small class="m-0 d-flex gap-1">
-      <i-bs name="github"></i-bs>
-      <a href="https://github.com/Smonman/SudokuToy">view source code</a>
-    </small>
-    <small class="m-0 d-flex gap-1">
-      made with
-      <i-bs name="heart-fill"></i-bs>
-      by <a href="https://github.com/Smonman">Smonman</a>
-    </small>
-  </div>
-</footer>
+  </main>
+  <footer @slideInBottom
+          class="d-flex flex-column flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="d-flex flex-column align-items-center">
+      <small class="d-flex gap-1">
+        <i-bs name="github"></i-bs>
+        <a href="https://github.com/Smonman/SudokuToy">view source code</a>
+      </small>
+      <small class="d-flex gap-1">
+        made with
+        <i-bs name="heart-fill"></i-bs>
+        by <a href="https://github.com/Smonman">Smonman</a>
+      </small>
+    </div>
+  </footer>
+</div>

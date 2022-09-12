@@ -9,7 +9,7 @@ const transitionCurve = 'cubic-bezier(0.4, 0, .1, 1)';
 const transitionDelay = 0;
 
 /** Animations, that an element fades in from the bottom. */
-export const fixedAppearAnimations: AnimationTriggerMetadata = trigger(
+export const fixedAppearAnimation: AnimationTriggerMetadata = trigger(
   'fixedAppear',
   [
     state('void', style(voidStyles)),
