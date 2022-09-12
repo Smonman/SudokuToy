@@ -5,9 +5,14 @@
             role="button">
       Play
     </button>
-    <button (click)="pause()" [disabled]="!isRunning" class="btn btn-secondary btn-sm" role="button">Pause
+    <button (click)="pause()" [disabled]="!isRunning" class="btn btn-secondary btn-sm" role="button">
+      Pause
     </button>
-    <button (click)="stop()" class="btn btn-secondary btn-sm" role="button">Stop</button>
-    <button (click)="reset()" class="btn btn-secondary btn-sm" role="button">Reset</button>
+    <button (click)="stop()" [disabled]="isStopped" class="btn btn-secondary btn-sm" role="button">
+      Stop
+    </button>
+    <button (click)="reset()" class="btn btn-secondary btn-sm" role="button">
+      Reset
+    </button>
   </div>
 </div>
