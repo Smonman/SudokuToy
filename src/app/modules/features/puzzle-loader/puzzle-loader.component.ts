@@ -41,6 +41,7 @@ export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy
         validateMaxBoxSize('puzzleSize', 'boxHeight'),
         validateDivisibleBoxSize('puzzleSize', 'boxWidth'),
         validateDivisibleBoxSize('puzzleSize', 'boxHeight'),
+        validateSizeMatch('puzzle', 'puzzleSize'),
       ],
     });
 
@@ -113,6 +114,24 @@ export function validateMaxBoxSize(puzzleSizeControlName: string, boxSizeControl
     } else {
       form.get(boxSizeControlName)?.setErrors({validateMaxBoxSize: {valid: false}});
       return {validateMaxBoxSize: {valid: false, controlName: boxSizeControlName}};
+    }
+  };
+}
+
+export function validateSizeMatch(puzzleControlName: string, puzzleSizeControlName: string): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const form = control as FormGroup;
+    const puzzle = form.get(puzzleControlName)?.value;
+    const size = Number(form.get(puzzleSizeControlName)?.value);
+    if (puzzle) {
+      if (puzzle.length === 0 || puzzle.length === size * size) {
+        return null;
+      } else {
+        form.get(puzzleSizeControlName)?.setErrors({validateSizeMatch: {valid: false}});
+        return {validateSizeMatch: {valid: false, controlName: puzzleSizeControlName}};
+      }
+    } else {
+      return null;
     }
   };
 }
