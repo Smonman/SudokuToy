@@ -1,7 +1,10 @@
 <app-page-layout>
   <div class="d-flex align-items-center justify-content-around flex-wrap">
-    <div>
-      <app-timer></app-timer>
+    <div class="d-flex flex-column gap-2">
+      <div class="d-flex flex-row justify-content-between">
+        <app-input-mode-selector></app-input-mode-selector>
+        <app-timer></app-timer>
+      </div>
       <app-sudoku></app-sudoku>
     </div>
   </div>

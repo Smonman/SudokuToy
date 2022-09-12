@@ -181,6 +181,7 @@ export class SudokuService implements OnDestroy {
 
   setCurInputModeIndex(index: number): void {
     this.curInputModeIndex.next(index);
+    this.curInputMode.next(this.getInputModes()[index]);
   }
 
   computeCellId(row: number, col: number): number {

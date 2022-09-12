@@ -1,0 +1,15 @@
+<div class="d-inline-block" ngbDropdown>
+  <button class="btn btn-sm btn-outline-secondary" id="dropdown-mode" ngbDropdownToggle type="button">
+    {{curInputMode?.title || 'Select input mode'}}
+  </button>
+  <ul aria-labelledby="dropdown-mode"
+      class="gap-1 p-2 rounded-3 mx-0 shadow"
+      ngbDropdownMenu>
+    <li class="dropdown-header h6">Input modes</li>
+    <li (click)="setInputMode(i); $event.stopPropagation()" *ngFor="let m of inputModes; let i = index"
+        class="rounded-2" ngbDropdownItem
+        role="button">
+      {{m.title}}
+    </li>
+  </ul>
+</div>
