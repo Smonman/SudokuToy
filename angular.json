@@ -103,5 +103,7 @@
       }
     }
   },
-  "defaultProject": "SudokuToy"
+  "cli": {
+    "analytics": false
+  }
 }

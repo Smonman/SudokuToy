@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { SudokuService } from '../sudoku/services/sudoku.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
@@ -19,11 +19,11 @@ export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy
   }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      puzzle: new FormControl('', [Validators.pattern('[\\.0123456789 ]*')]),
-      puzzleSize: new FormControl(null, [Validators.required, Validators.min(2)]),
-      boxWidth: new FormControl(null, [Validators.required, Validators.min(1)]),
-      boxHeight: new FormControl(null, [Validators.required, Validators.min(1)]),
+    this.form = new UntypedFormGroup({
+      puzzle: new UntypedFormControl('', [Validators.pattern('[\\.0123456789 ]*')]),
+      puzzleSize: new UntypedFormControl(null, [Validators.required, Validators.min(2)]),
+      boxWidth: new UntypedFormControl(null, [Validators.required, Validators.min(1)]),
+      boxHeight: new UntypedFormControl(null, [Validators.required, Validators.min(1)]),
     });
 
     this.form.controls['puzzle'].valueChanges
