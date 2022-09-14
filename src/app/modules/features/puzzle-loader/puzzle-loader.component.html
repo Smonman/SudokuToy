@@ -66,8 +66,11 @@
             </app-form-errors>
           </div>
         </div>
-        <app-reactive-button [disabled]="hasError()" [loading]="loading" label="Load Puzzle" type="submit">
-        </app-reactive-button>
+        <div class="d-flex flex-row justify-content-between">
+          <button class="btn btn-outline-secondary" routerLink="" type="button">Cancel</button>
+          <app-reactive-button [disabled]="hasError()" [loading]="loading" label="Load Puzzle" type="submit">
+          </app-reactive-button>
+        </div>
       </form>
     </div>
   </div>
