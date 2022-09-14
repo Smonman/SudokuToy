@@ -1,17 +1,19 @@
-<div class="border border-dark border-3 d-inline-box m-0 p-0">
-  <ng-container *ngFor="let _ of [].constructor(verticalBoxCount); let vb = index;">
-    <div class="d-flex">
-      <ng-container *ngFor="let _ of [].constructor(horizontalBoxCount); let hb = index;">
-        <div class="border border-dark border-1 d-inline-box mb-0 p-0">
-          <ng-container *ngFor="let _ of [].constructor(boxHeight); let row = index">
-            <div class="d-flex">
-              <ng-container *ngFor="let _ of [].constructor(boxWidth); let col = index">
-                <app-sudoku-cell [col]="col + hb * boxWidth" [row]="row + vb * boxHeight"></app-sudoku-cell>
-              </ng-container>
-            </div>
-          </ng-container>
-        </div>
-      </ng-container>
-    </div>
-  </ng-container>
+<div class="d-flex justify-content-center">
+  <div class="border border-dark border-3 d-inline-box m-0 p-0">
+    <ng-container *ngFor="let _ of [].constructor(verticalBoxCount); let vb = index;">
+      <div class="d-flex">
+        <ng-container *ngFor="let _ of [].constructor(horizontalBoxCount); let hb = index;">
+          <div class="border border-dark border-1 d-inline-box mb-0 p-0">
+            <ng-container *ngFor="let _ of [].constructor(boxHeight); let row = index">
+              <div class="d-flex">
+                <ng-container *ngFor="let _ of [].constructor(boxWidth); let col = index">
+                  <app-sudoku-cell [col]="col + hb * boxWidth" [row]="row + vb * boxHeight"></app-sudoku-cell>
+                </ng-container>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
 </div>
