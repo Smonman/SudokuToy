@@ -7,7 +7,8 @@
       ngbDropdownMenu>
     <li class="dropdown-header h6">Input modes</li>
     <li (click)="setInputMode(i); $event.stopPropagation()" *ngFor="let m of inputModes; let i = index"
-        class="rounded-2" ngbDropdownItem
+        [class.active]="curInputModeIndex === i" class="rounded-2"
+        ngbDropdownItem
         role="button">
       {{m.title}}
     </li>
