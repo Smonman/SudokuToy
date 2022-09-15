@@ -8,9 +8,9 @@ describe('InputModeSelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InputModeSelectorComponent ]
+      declarations: [InputModeSelectorComponent],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(InputModeSelectorComponent);
     component = fixture.componentInstance;

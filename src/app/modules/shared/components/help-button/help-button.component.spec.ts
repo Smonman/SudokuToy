@@ -8,9 +8,9 @@ describe('HelpButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HelpButtonComponent ]
+      declarations: [HelpButtonComponent],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(HelpButtonComponent);
     component = fixture.componentInstance;
