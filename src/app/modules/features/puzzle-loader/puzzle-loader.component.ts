@@ -28,6 +28,7 @@ export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy
       puzzleSize: new FormControl<number | null>(null, [
         Validators.required,
         Validators.min(2),
+        Validators.max(16),
       ]),
       boxWidth: new FormControl<number | null>(null, [
         Validators.required,

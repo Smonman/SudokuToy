@@ -26,6 +26,9 @@
               <app-form-error *ngIf="fieldHasErrors('puzzleSize', 'min')">
                 the puzzle size has to be larger than 1
               </app-form-error>
+              <app-form-error *ngIf="fieldHasErrors('puzzleSize', 'max')">
+                the largest allowed puzzle size is 16
+              </app-form-error>
               <app-form-error *ngIf="fieldHasErrors('puzzleSize', 'validateSizeMatch')">
                 the puzzle size has to suit the puzzle
               </app-form-error>
