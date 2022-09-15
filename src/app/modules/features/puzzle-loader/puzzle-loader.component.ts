@@ -79,7 +79,9 @@ export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy
   }
 
   openModal(modal: any): void {
-    this.modalService.open(modal, {centered: true, scrollable: true, modalDialogClass: 'modal-content-rounded'});
+    if (!this.modalService.hasOpenModals() && modal) {
+      this.modalService.open(modal, {centered: true, scrollable: true, modalDialogClass: 'modal-content-rounded'});
+    }
   }
 
   protected onValidSubmit(formValue: any): void {
