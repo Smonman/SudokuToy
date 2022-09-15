@@ -92,9 +92,11 @@ export class SudokuCellComponent implements OnInit, OnDestroy {
     if (this.selected && !this.readonly) {
       if (Number(e.key)) {
         this.curInputMode?.updateValue(this.id, Number(e.key));
+        this.sudokuService.checkIfFinished();
       }
       if (e.key === 'Backspace' || e.key === 'Delete') {
         this.curInputMode?.updateValue(this.id, null);
+        this.sudokuService.checkIfFinished();
       }
     }
   }

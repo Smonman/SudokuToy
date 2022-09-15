@@ -23,6 +23,7 @@ export class SudokuService implements OnDestroy {
   private inputModes = new BehaviorSubject<InputMode[]>([]);
   private curInputMode = new BehaviorSubject<InputMode | null>(null);
   private curInputModeIndex = new BehaviorSubject<number>(0);
+  private finished = new Subject<void>();
   private $destroy = new Subject<void>();
 
   constructor(private timerService: TimerService) {
@@ -95,6 +96,10 @@ export class SudokuService implements OnDestroy {
 
   get $inputModes(): Observable<InputMode[]> {
     return this.inputModes.asObservable();
+  }
+
+  get $finished(): Observable<void> {
+    return this.finished.asObservable();
   }
 
   ngOnDestroy() {
@@ -177,6 +182,7 @@ export class SudokuService implements OnDestroy {
 
   writeToInputMode(index: number, id: number, value: number | number[] | null) {
     this.getInputModes()[index].updateValue(id, value);
+    if (index === 0) this.checkIfFinished();
   }
 
   setCurInputModeIndex(index: number): void {
@@ -199,5 +205,13 @@ export class SudokuService implements OnDestroy {
       this.cellIds.push(id);
     }
     this.selectedCellIds.next(this.cellIds);
+  }
+
+  checkIfFinished(): void {
+    const temp = this.getInputModes()[0].value;
+    for (const e of temp) {
+      if (e === null) return;
+    }
+    this.finished.next();
   }
 }
