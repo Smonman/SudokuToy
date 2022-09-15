@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { SudokuService } from '../sudoku/services/sudoku.service';
 import { Subject, takeUntil } from 'rxjs';
@@ -10,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-puzzle-loader',
   templateUrl: './puzzle-loader.component.html',
   styleUrls: ['./puzzle-loader.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy {
 

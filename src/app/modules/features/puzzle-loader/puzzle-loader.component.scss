@@ -1,6 +1,6 @@
-@import "../../../../../node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootstrap/scss/bootstrap";
 
-::ng-deep .modal-content-rounded .modal-content {
+.modal-content-rounded .modal-content {
   @extend .rounded-4;
   @extend .shadow;
 }
