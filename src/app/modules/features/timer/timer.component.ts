@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TimerService } from './services/timer.service';
-import { interval, Subject, Subscription, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-timer',
@@ -14,42 +14,16 @@ export class TimerComponent implements OnInit, OnDestroy {
   public isStopped: boolean = false;
   public curTime: number = 0;
   private $destroy = new Subject<void>();
-  private intervalTimer = interval(1000);
-  private subscription: Subscription = new Subscription();
 
   constructor(private timerService: TimerService) {
   }
 
   ngOnInit(): void {
 
-    // the order of these subscriptions is important
-
-    this.timerService.$pause
+    this.timerService.$tick
       .pipe(takeUntil(this.$destroy))
-      .subscribe(() => {
-        this.subscription.unsubscribe();
-      });
-
-    this.timerService.$stop
-      .pipe(takeUntil(this.$destroy))
-      .subscribe(() => {
-        this.subscription.unsubscribe();
-      });
-
-    this.timerService.$reset
-      .pipe(takeUntil(this.$destroy))
-      .subscribe(() => {
-        this.curTime = 0;
-      });
-
-    this.timerService.$start
-      .pipe(takeUntil(this.$destroy))
-      .subscribe(() => {
-        this.subscription = this.intervalTimer
-          .pipe(takeUntil(this.$destroy))
-          .subscribe(() => {
-            this.curTime += 1;
-          });
+      .subscribe((curTime: number) => {
+        this.curTime = curTime;
       });
 
     this.timerService.$isPaused
