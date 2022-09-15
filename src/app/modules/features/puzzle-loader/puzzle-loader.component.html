@@ -1,10 +1,10 @@
 <app-page-layout>
   <div class="d-flex justify-content-center">
-    <div class="col-6">
+    <div class="col-sm-6">
       <h1 class="h2">New puzzle</h1>
       <form (ngSubmit)="submit()" [formGroup]="form" class="form">
         <div class="row mb-3">
-          <div class="col-9">
+          <div class="col-sm-9">
             <div class="d-flex flex-row justify-content-between">
               <label class="form-label" for="puzzle-input">Puzzle:</label>
               <app-help-button (click)="openModal(puzzleModal)"></app-help-button>
@@ -12,7 +12,7 @@
             <input class="form-control" formControlName="puzzle" id="puzzle-input"
                    name="puzzle" type="text">
           </div>
-          <div class="col-3">
+          <div class="col-sm-3">
             <div class="d-flex flex-row justify-content-between">
               <label class="form-label" for="puzzleSize-input">Size:</label>
               <app-help-button (click)="openModal(sizeModal)"></app-help-button>
