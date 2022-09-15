@@ -53,7 +53,7 @@ export class SudokuService implements OnDestroy {
       .pipe(takeUntil(this.$destroy))
       .subscribe(() => {
         this.timerService.stopTimer();
-      })
+      });
   }
 
   get $size(): Observable<number> {
