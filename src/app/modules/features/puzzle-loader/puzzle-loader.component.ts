@@ -4,17 +4,18 @@ import { SudokuService } from '../sudoku/services/sudoku.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormBase } from '../../shared/classes/form-base';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-puzzle-loader',
   templateUrl: './puzzle-loader.component.html',
-  styleUrls: ['./puzzle-loader.component.css'],
+  styleUrls: ['./puzzle-loader.component.scss'],
 })
 export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy {
 
   private $destroy = new Subject<void>();
 
-  constructor(private sudokuService: SudokuService, private router: Router) {
+  constructor(private sudokuService: SudokuService, private router: Router, private modalService: NgbModal) {
     super();
   }
 
@@ -73,6 +74,10 @@ export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy
   ngOnDestroy() {
     this.$destroy.next();
     this.$destroy.complete();
+  }
+
+  openModal(modal: any): void {
+    this.modalService.open(modal, {centered: true, scrollable: true, modalDialogClass: 'modal-content-rounded'});
   }
 
   protected onValidSubmit(formValue: any): void {

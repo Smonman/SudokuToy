@@ -6,7 +6,7 @@ import { InputMode } from '../../shared/classes/input-mode';
 @Component({
   selector: 'app-sudoku',
   templateUrl: './sudoku.component.html',
-  styleUrls: ['./sudoku.component.css'],
+  styleUrls: ['./sudoku.component.scss'],
 })
 export class SudokuComponent implements OnInit, OnDestroy {
   public size: number = 0;

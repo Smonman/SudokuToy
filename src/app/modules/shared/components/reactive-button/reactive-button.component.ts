@@ -4,7 +4,7 @@ import { Theme } from '../../enums/theme';
 @Component({
   selector: 'app-reactive-button',
   templateUrl: './reactive-button.component.html',
-  styleUrls: ['./reactive-button.component.css'],
+  styleUrls: ['./reactive-button.component.scss'],
 })
 export class ReactiveButtonComponent {
   @Input() loading = false;

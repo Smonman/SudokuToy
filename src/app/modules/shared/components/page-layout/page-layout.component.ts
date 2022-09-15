@@ -6,7 +6,7 @@ import { slideInBottomAnimation } from '../../animations/slide-in-bottom.animati
 @Component({
   selector: 'app-page-layout',
   templateUrl: './page-layout.component.html',
-  styleUrls: ['./page-layout.component.css'],
+  styleUrls: ['./page-layout.component.scss'],
   animations: [fixedAppearAnimation, appearAnimation, slideInBottomAnimation],
 })
 export class PageLayoutComponent implements OnInit {

@@ -4,7 +4,7 @@ import { SudokuService } from '../sudoku/services/sudoku.service';
 @Component({
   selector: 'app-playground',
   templateUrl: './playground.component.html',
-  styleUrls: ['./playground.component.css'],
+  styleUrls: ['./playground.component.scss'],
 })
 export class PlaygroundComponent implements OnInit {
 

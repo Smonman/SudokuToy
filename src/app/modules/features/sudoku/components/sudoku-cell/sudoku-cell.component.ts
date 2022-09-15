@@ -7,7 +7,7 @@ import { lightAppearAnimation } from '../../../../shared/animations/light-appear
 @Component({
   selector: 'app-sudoku-cell',
   templateUrl: './sudoku-cell.component.html',
-  styleUrls: ['./sudoku-cell.component.css'],
+  styleUrls: ['./sudoku-cell.component.scss'],
   animations: [lightAppearAnimation],
 })
 export class SudokuCellComponent implements OnInit, OnDestroy {

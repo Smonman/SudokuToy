@@ -6,7 +6,7 @@ import { Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-input-mode-selector',
   templateUrl: './input-mode-selector.component.html',
-  styleUrls: ['./input-mode-selector.component.css'],
+  styleUrls: ['./input-mode-selector.component.scss'],
 })
 export class InputModeSelectorComponent implements OnInit, OnDestroy {
 

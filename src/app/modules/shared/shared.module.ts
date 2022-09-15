@@ -8,6 +8,7 @@ import { FormErrorsComponent } from './components/form-errors/form-errors.compon
 import { FormErrorComponent } from './components/form-errors/form-error/form-error.component';
 import { exclamationDiamond, github, heartFill, NgxBootstrapIconsModule, questionCircle } from 'ngx-bootstrap-icons';
 import { ReactiveButtonComponent } from './components/reactive-button/reactive-button.component';
+import { HelpButtonComponent } from './components/help-button/help-button.component';
 
 const icons = {
   heartFill,
@@ -22,6 +23,7 @@ const sharedDeclarations = [
   FormErrorsComponent,
   FormErrorComponent,
   ReactiveButtonComponent,
+  HelpButtonComponent,
 ];
 
 const sharedImports = [
