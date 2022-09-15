@@ -17,3 +17,17 @@
     </ng-container>
   </div>
 </div>
+
+<ng-template #finishedModal let-modal>
+  <div class="modal-header px-4 pt-4">
+    <h2 class="modal-title fw-bold">Congratulations, you finished the puzzle!</h2>
+  </div>
+  <div class="modal-body px-4 pb-4">
+    <p>
+      You finished this puzzle in <b>{{getFinishedTime() | seconds}}</b>, only {{getFinishedTime()}} seconds, wow!
+    </p>
+    <button (click)="modal.close('Close click')" class="btn btn-lg btn-primary mt-4 w-100" type="button">
+      Great!
+    </button>
+  </div>
+</ng-template>

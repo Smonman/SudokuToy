@@ -1,7 +1,9 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { SudokuService } from './services/sudoku.service';
 import { Subject, takeUntil } from 'rxjs';
 import { InputMode } from '../../shared/classes/input-mode';
+import { TimerService } from '../timer/services/timer.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-sudoku',
@@ -9,6 +11,9 @@ import { InputMode } from '../../shared/classes/input-mode';
   styleUrls: ['./sudoku.component.scss'],
 })
 export class SudokuComponent implements OnInit, OnDestroy {
+
+  @ViewChild('finishedModal') finishedModal: TemplateRef<any> | null = null;
+
   public size: number = 0;
   public boxWidth: number = 0;
   public boxHeight: number = 0;
@@ -19,7 +24,7 @@ export class SudokuComponent implements OnInit, OnDestroy {
 
   private $destroy = new Subject<void>();
 
-  constructor(private sudokuService: SudokuService) {
+  constructor(private sudokuService: SudokuService, private timerService: TimerService, private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -50,6 +55,12 @@ export class SudokuComponent implements OnInit, OnDestroy {
     this.sudokuService.$curInputMode
       .pipe(takeUntil(this.$destroy))
       .subscribe((im: InputMode | null) => this.curInputMode = im);
+
+    this.sudokuService.$finished
+      .pipe(takeUntil(this.$destroy))
+      .subscribe(() => {
+        this.openModal(this.finishedModal);
+      });
   }
 
   @HostListener('window:keyup', ['$event'])
@@ -59,6 +70,16 @@ export class SudokuComponent implements OnInit, OnDestroy {
       this.sudokuService.setHighlightedCellIds([]);
     } else if (e.key === 'Tab' || e.key === ' ') {
       this.sudokuService.switchInput();
+    }
+  }
+
+  getFinishedTime(): number {
+    return this.timerService.getCurrentTime();
+  }
+
+  openModal(modal: any): void {
+    if (!this.modalService.hasOpenModals() && modal) {
+      this.modalService.open(modal, {centered: true, scrollable: true, modalDialogClass: 'modal-content-rounded'});
     }
   }
 
