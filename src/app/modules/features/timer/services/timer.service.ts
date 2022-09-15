@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, ReplaySubject, Subject, takeUntil } from 'rxjs';
+import { SudokuService } from '../../sudoku/services/sudoku.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TimerService {
+export class TimerService implements OnDestroy {
 
   private start = new ReplaySubject<void>(1);
   private pause = new ReplaySubject<void>(1);
@@ -13,8 +14,14 @@ export class TimerService {
   private isRunning = new BehaviorSubject<boolean>(false);
   private isPaused = new BehaviorSubject<boolean>(false);
   private isStopped = new BehaviorSubject<boolean>(false);
+  private $destroy = new Subject<void>();
 
-  constructor() {
+  constructor(private sudokuService: SudokuService) {
+    this.sudokuService.$finished
+      .pipe(takeUntil(this.$destroy))
+      .subscribe(() => {
+        this.stopTimer();
+      });
   }
 
   get $start(): Observable<void> {
@@ -43,6 +50,11 @@ export class TimerService {
 
   get $isStopped(): Observable<boolean> {
     return this.isStopped.asObservable();
+  }
+
+  ngOnDestroy(): void {
+    this.$destroy.next();
+    this.$destroy.complete();
   }
 
   startTimer() {
