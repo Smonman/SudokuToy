@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { TimerService } from './services/timer.service';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.scss'],
 })
-export class TimerComponent implements OnInit, OnDestroy {
+export class TimerComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   public isRunning: boolean = false;
   public isPaused: boolean = false;
@@ -15,11 +15,10 @@ export class TimerComponent implements OnInit, OnDestroy {
   public curTime: number = 0;
   private $destroy = new Subject<void>();
 
-  constructor(private timerService: TimerService) {
+  constructor(private timerService: TimerService, private changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
-
     this.timerService.$tick
       .pipe(takeUntil(this.$destroy))
       .subscribe((curTime: number) => {
@@ -43,6 +42,10 @@ export class TimerComponent implements OnInit, OnDestroy {
       .subscribe((isRunning: boolean) => {
         this.isRunning = isRunning;
       });
+  }
+
+  ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
   }
 
   start() {
