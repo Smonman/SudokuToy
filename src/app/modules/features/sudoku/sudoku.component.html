@@ -26,6 +26,9 @@
     <p>
       You finished this puzzle in <b>{{getFinishedTime() | seconds}}</b>, only {{getFinishedTime()}} seconds, wow!
     </p>
+    <p class="fst-italic">
+      Note, that the puzzle is not checked for its correctness.
+    </p>
     <button (click)="modal.close('Close click')" class="btn btn-lg btn-primary mt-4 w-100" type="button">
       Great!
     </button>
