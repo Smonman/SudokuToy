@@ -1,16 +1,14 @@
+@import "../../../../../../../node_modules/bootstrap/scss/bootstrap";
+
 .cell {
-  min-width: 4rem;
-  min-height: 4rem;
+  min-width: rfs-fluid-value(3.25rem);
+  min-height: rfs-fluid-value(3.25rem);
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
 
-.selected {
-  background-color: aquamarine;
-}
-
-.hover:hover:not(.selected) {
+.hover:hover {
   background-color: whitesmoke;
 }
 
@@ -21,3 +19,18 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+.value {
+  @extend .h3;
+  font-size: rfs-fluid-value(1.75rem);
+}
+
+.corner {
+  font-size: rfs-fluid-value(0.65rem);
+}
+
+.center {
+  font-size: rfs-fluid-value(0.8rem);
+}
+
+
