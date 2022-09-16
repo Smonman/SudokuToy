@@ -1,4 +1,4 @@
-@import "../../../../../../../../node_modules/bootstrap/scss/bootstrap";
+@import "bootstrap/scss/vendor/_rfs";
 
 .cell {
   min-width: rfs-fluid-value(3.25rem);
@@ -21,7 +21,6 @@
 }
 
 .value {
-  @extend .h3;
   font-size: rfs-fluid-value(1.75rem);
 }
 
