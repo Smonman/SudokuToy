@@ -65,14 +65,18 @@ export class SudokuCellComponent implements OnInit, OnDestroy {
 
     this.sudokuService.$clearCells
       .pipe(takeUntil(this.$destroy))
-      .subscribe(() => this.clearCell());
+      .subscribe(() => {
+        this.clearCell();
+      });
 
     this.sudokuService.$puzzle
       .pipe(takeUntil(this.$destroy))
       .subscribe((p: string | null) => {
         const v = Number(p?.charAt(this.id)) || null;
-        this.sudokuService.writeToInputMode(0, this.id, v);
-        this.readonly = Boolean(v);
+        if (v) {
+          this.sudokuService.writeToInputMode(0, this.id, v);
+          this.readonly = Boolean(v);
+        }
       });
   }
 
@@ -91,12 +95,10 @@ export class SudokuCellComponent implements OnInit, OnDestroy {
   updateInput(e: KeyboardEvent): void {
     if (this.selected && !this.readonly) {
       if (Number(e.key)) {
-        this.curInputMode?.updateValue(this.id, Number(e.key));
-        this.sudokuService.checkIfFinished();
+        this.sudokuService.writeToInputMode(this.curInputModeIndex, this.id, Number(e.key));
       }
       if (e.key === 'Backspace' || e.key === 'Delete') {
-        this.curInputMode?.updateValue(this.id, null);
-        this.sudokuService.checkIfFinished();
+        this.sudokuService.writeToInputMode(this.curInputModeIndex, this.id, null);
       }
     }
   }

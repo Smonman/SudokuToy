@@ -96,6 +96,18 @@ export class TimerService implements OnDestroy {
     this.isStopped.next(false);
   }
 
+  getIsRunning(): boolean {
+    return this.isRunning.value;
+  }
+
+  getIsPaused(): boolean {
+    return this.isPaused.value;
+  }
+
+  getIsStopped(): boolean {
+    return this.isStopped.value;
+  }
+
   getCurrentTime(): number {
     return this.curTime;
   }
