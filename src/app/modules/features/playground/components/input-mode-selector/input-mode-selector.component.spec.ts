@@ -1,22 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SudokuCellComponent } from './sudoku-cell.component';
+import { InputModeSelectorComponent } from './input-mode-selector.component';
 import { SharedTestingModule } from '../../../../shared/shared-testing.module';
 
-describe('SudokuCellComponent', () => {
-  let component: SudokuCellComponent;
-  let fixture: ComponentFixture<SudokuCellComponent>;
+describe('InputModeSelectorComponent', () => {
+  let component: InputModeSelectorComponent;
+  let fixture: ComponentFixture<InputModeSelectorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SudokuCellComponent],
+      declarations: [InputModeSelectorComponent],
       imports: [SharedTestingModule],
     })
       .compileComponents();
-  });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SudokuCellComponent);
+    fixture = TestBed.createComponent(InputModeSelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

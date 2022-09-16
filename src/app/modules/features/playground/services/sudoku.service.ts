@@ -4,7 +4,7 @@ import { InputMode } from '../../../shared/classes/input-mode';
 import { ValueMode } from '../classes/value-mode';
 import { CornerMode } from '../classes/corner-mode';
 import { CenterMode } from '../classes/center-mode';
-import { TimerService } from '../../timer/services/timer.service';
+import { TimerService } from './timer.service';
 
 @Injectable({
   providedIn: 'root',

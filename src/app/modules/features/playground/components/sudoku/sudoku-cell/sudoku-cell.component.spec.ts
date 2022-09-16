@@ -1,22 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TimerComponent } from './timer.component';
-import { SharedTestingModule } from '../../shared/shared-testing.module';
+import { SudokuCellComponent } from './sudoku-cell.component';
+import { SharedTestingModule } from '../../../../../shared/shared-testing.module';
 
-describe('TimerComponent', () => {
-  let component: TimerComponent;
-  let fixture: ComponentFixture<TimerComponent>;
+describe('SudokuCellComponent', () => {
+  let component: SudokuCellComponent;
+  let fixture: ComponentFixture<SudokuCellComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TimerComponent],
+      declarations: [SudokuCellComponent],
       imports: [SharedTestingModule],
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TimerComponent);
+    fixture = TestBed.createComponent(SudokuCellComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

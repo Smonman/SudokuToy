@@ -1,8 +1,8 @@
 import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
-import { SudokuService } from '../../services/sudoku.service';
+import { SudokuService } from '../../../services/sudoku.service';
 import { Subject, takeUntil } from 'rxjs';
-import { InputMode } from '../../../../shared/classes/input-mode';
-import { lightAppearAnimation } from '../../../../shared/animations/light-appear.animation';
+import { InputMode } from '../../../../../shared/classes/input-mode';
+import { lightAppearAnimation } from '../../../../../shared/animations/light-appear.animation';
 
 @Component({
   selector: 'app-sudoku-cell',

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { SudokuService } from '../sudoku/services/sudoku.service';
+import { SudokuService } from '../playground/services/sudoku.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormBase } from '../../shared/classes/form-base';
