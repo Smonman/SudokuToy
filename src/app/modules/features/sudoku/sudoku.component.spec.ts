@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SudokuComponent } from './sudoku.component';
+import { SharedTestingModule } from '../../shared/shared-testing.module';
 
 describe('SudokuComponent', () => {
   let component: SudokuComponent;
@@ -9,6 +10,7 @@ describe('SudokuComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SudokuComponent],
+      imports: [SharedTestingModule],
     })
       .compileComponents();
   });

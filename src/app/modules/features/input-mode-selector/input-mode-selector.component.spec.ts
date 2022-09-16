@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InputModeSelectorComponent } from './input-mode-selector.component';
+import { SharedTestingModule } from '../../shared/shared-testing.module';
 
 describe('InputModeSelectorComponent', () => {
   let component: InputModeSelectorComponent;
@@ -9,6 +10,7 @@ describe('InputModeSelectorComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [InputModeSelectorComponent],
+      imports: [SharedTestingModule],
     })
       .compileComponents();
 

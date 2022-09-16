@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HelpButtonComponent } from './help-button.component';
+import { SharedTestingModule } from '../../shared-testing.module';
 
 describe('HelpButtonComponent', () => {
   let component: HelpButtonComponent;
@@ -9,6 +10,7 @@ describe('HelpButtonComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HelpButtonComponent],
+      imports: [SharedTestingModule],
     })
       .compileComponents();
 

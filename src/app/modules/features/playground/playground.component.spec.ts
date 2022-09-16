@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PlaygroundComponent } from './playground.component';
+import { SharedTestingModule } from '../../shared/shared-testing.module';
 
 describe('LandingComponent', () => {
   let component: PlaygroundComponent;
@@ -9,6 +10,7 @@ describe('LandingComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PlaygroundComponent],
+      imports: [SharedTestingModule],
     })
       .compileComponents();
   });
