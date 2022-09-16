@@ -1,5 +1,5 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { TimerService } from './services/timer.service';
+import { TimerService } from '../../services/timer.service';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({

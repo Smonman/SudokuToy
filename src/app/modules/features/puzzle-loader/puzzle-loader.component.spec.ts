@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PuzzleLoaderComponent } from './puzzle-loader.component';
+import { SharedTestingModule } from '../../shared/shared-testing.module';
 
 describe('PuzzleLoaderComponent', () => {
   let component: PuzzleLoaderComponent;
@@ -9,6 +10,7 @@ describe('PuzzleLoaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PuzzleLoaderComponent],
+      imports: [SharedTestingModule],
     })
       .compileComponents();
   });

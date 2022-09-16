@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SudokuService } from '../sudoku/services/sudoku.service';
-import { InputMode } from '../../shared/classes/input-mode';
+import { SudokuService } from '../../services/sudoku.service';
+import { InputMode } from '../../../../shared/classes/input-mode';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReactiveButtonComponent } from './reactive-button.component';
+import { SharedTestingModule } from '../../shared-testing.module';
 
 describe('ReactiveButtonComponent', () => {
   let component: ReactiveButtonComponent;
@@ -9,6 +10,7 @@ describe('ReactiveButtonComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ReactiveButtonComponent],
+      imports: [SharedTestingModule],
     })
       .compileComponents();
 

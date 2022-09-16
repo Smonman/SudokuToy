@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, HostListener, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { SudokuService } from './services/sudoku.service';
+import { SudokuService } from '../../services/sudoku.service';
 import { Subject, takeUntil } from 'rxjs';
-import { InputMode } from '../../shared/classes/input-mode';
-import { TimerService } from '../timer/services/timer.service';
+import { InputMode } from '../../../../shared/classes/input-mode';
+import { TimerService } from '../../services/timer.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
