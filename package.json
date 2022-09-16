@@ -6,9 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "build:prod": "ng build --configuration production --base-href https://smonman.github.io/SudokuToy/",
-    "test:headless": "ng test --watch=false --browsers=ChromeHeadless"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
@@ -35,6 +33,7 @@
     "@angular/compiler-cli": "^14.2.2",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
+    "angular-cli-ghpages": "^1.0.3",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
