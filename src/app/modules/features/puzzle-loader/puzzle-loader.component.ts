@@ -24,6 +24,7 @@ export class PuzzleLoaderComponent extends FormBase implements OnInit, OnDestroy
     this.form = new FormGroup({
       puzzle: new FormControl<string | null>('', [
         Validators.pattern('[\\.0123456789 ]*'),
+        validatePuzzle(),
       ]),
       puzzleSize: new FormControl<number | null>(null, [
         Validators.required,
@@ -138,6 +139,21 @@ export function validateSizeMatch(puzzleControlName: string, puzzleSizeControlNa
       } else {
         form.get(puzzleSizeControlName)?.setErrors({validateSizeMatch: {valid: false}});
         return {validateSizeMatch: {valid: false, controlName: puzzleSizeControlName}};
+      }
+    } else {
+      return null;
+    }
+  };
+}
+
+export function validatePuzzle(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+    if (value && value.length > 0) {
+      if (value.includes('.') || value.includes('0')) {
+        return null;
+      } else {
+        return {validatePuzzle: {valid: false}};
       }
     } else {
       return null;

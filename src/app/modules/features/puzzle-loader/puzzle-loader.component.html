@@ -11,6 +11,11 @@
             </div>
             <input class="form-control" formControlName="puzzle" id="puzzle-input"
                    name="puzzle" type="text">
+            <app-form-errors>
+              <app-form-error *ngIf="fieldHasErrors('puzzle', 'validatePuzzle')">
+                this puzzle is not valid
+              </app-form-error>
+            </app-form-errors>
           </div>
           <div class="col-sm-3">
             <div class="d-flex flex-row justify-content-between">
@@ -97,8 +102,13 @@
       <h2 class="modal-title fw-bold">Puzzle field</h2>
     </div>
     <div class="modal-body px-4 pb-4">
-      <p>Enter your Sudoku into the <b>Puzzle</b> field as a string. Each character in the string represents one
-        cell of the Sudoku. For empty cells, use a dot or 0.</p>
+      <p>
+        Enter your Sudoku into the <b>Puzzle</b> field as a string. Each character in the string represents one
+        cell of the Sudoku. For empty cells, use a dot or 0.
+      </p>
+      <p class="note">
+        Complete puzzles are not a valid input.
+      </p>
       <h6>Example input</h6>
       <samp class="text-break">1...2...3...........................4...5...6...........................7...8...9</samp>
       <button (click)="modal.close('Close click')" class="btn btn-lg btn-primary mt-4 w-100" type="button">
@@ -116,8 +126,8 @@
         Enter the size of the Sudoku into the <b>Size</b> field. The size of a Sudoku is the number of cells in one row
         or colum.
       </p>
-      <p class="fst-italic">
-        Note, only square Sudoku are supported.
+      <p class="note">
+        Only square Sudoku are supported.
       </p>
       <button (click)="modal.close('Close click')" class="btn btn-lg btn-primary mt-4 w-100" type="button">
         Close
