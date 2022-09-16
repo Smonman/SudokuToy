@@ -1,0 +1,35 @@
+@import "bootstrap/scss/vendor/_rfs";
+
+.cell {
+  min-width: rfs-fluid-value(3.25rem);
+  min-height: rfs-fluid-value(3.25rem);
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.hover:hover {
+  background-color: whitesmoke;
+}
+
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.value {
+  font-size: rfs-fluid-value(1.75rem);
+}
+
+.corner {
+  font-size: rfs-fluid-value(0.65rem);
+}
+
+.center {
+  font-size: rfs-fluid-value(0.8rem);
+}
+
+

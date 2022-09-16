@@ -1,0 +1,18 @@
+<div class="d-flex align-items-center gap-2">
+  <span>{{curTime | seconds}}</span>
+  <div class="btn-group" role="group">
+    <button (click)="start()" [disabled]="isRunning || isStopped" class="btn btn-primary btn-sm"
+            role="button">
+      Play
+    </button>
+    <button (click)="pause()" [disabled]="!isRunning" class="btn btn-light btn-sm" role="button">
+      Pause
+    </button>
+    <button (click)="stop()" [disabled]="isStopped" class="btn btn-light btn-sm" role="button">
+      Stop
+    </button>
+    <button (click)="reset()" class="btn btn-light btn-sm" role="button">
+      Reset
+    </button>
+  </div>
+</div>

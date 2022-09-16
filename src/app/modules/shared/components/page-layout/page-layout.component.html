@@ -1,0 +1,40 @@
+<header>
+  <nav class="navbar navbar-dark bg-dark navbar-expand sticky-top mb-5">
+    <div class="container-fluid">
+      <a class="navbar-brand fs-2 ms-3" routerLink="" style="font-family: 'GrenzeGotisch', Roboto, serif;">
+        Sudoku Toy
+      </a>
+      <button aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
+              class="navbar-toggler"
+              data-bs-target="#navbarNavAltMarkup" data-bs-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link" routerLink="new">New puzzle</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<main @fixedAppear class="my-5">
+  <div class="container">
+    <ng-content></ng-content>
+  </div>
+</main>
+<footer @slideInBottom
+        class="d-flex flex-column flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+  <div class="container-fluid">
+    <div class="d-flex flex-column align-items-center">
+      <small class="d-flex gap-1">
+        <i-bs name="github"></i-bs>
+        <a href="https://github.com/Smonman/SudokuToy">view source code</a>
+      </small>
+      <small class="d-flex gap-1">
+        made with
+        <i-bs name="heart-fill"></i-bs>
+        by <a href="https://github.com/Smonman">Smonman</a>
+      </small>
+    </div>
+  </div>
+</footer>

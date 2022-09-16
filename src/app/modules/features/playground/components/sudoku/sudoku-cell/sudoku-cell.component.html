@@ -1,0 +1,39 @@
+<div
+  class="cell border d-flex align-items-center justify-content-around hover no-select position-relative"
+  role="button">
+
+  <!-- selected -->
+  <div [class.invisible]="!selected" class="position-absolute top-0 start-0 w-100 h-100 bg-opacity-25 bg-primary"></div>
+
+  <!-- highlighted -->
+  <div [class.invisible]="!highlighted"
+       class="position-absolute top-0 start-0 w-100 h-100 bg-opacity-10 bg-primary"></div>
+
+  <ng-container *ngIf="inputModes[0].value[id] != null">
+    <!-- value -->
+    <div
+      @lightAppear
+      [class.text-primary]="!readonly"
+      class="d-flex flex-column align-items-center justify-content-around bg-transparent p-0 m-0 h3 value">
+      {{inputModes[0].value[id]}}
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="inputModes[0].value[id] == null">
+    <!-- corner -->
+    <div
+      class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-row flex-wrap align-items-start justify-content-start bg-transparent p-0 m-0 text-primary corner">
+      <span *ngFor="let v of $any(inputModes[1]).value[id]">
+        {{v}}
+      </span>
+    </div>
+    <!-- center -->
+    <div
+      class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-row align-items-center justify-content-center bg-transparent p-0 m-0 text-primary center"
+      style="font-size: 0.8rem">
+      <span *ngFor="let v of $any(inputModes[2]).value[id]">
+        {{v}}
+      </span>
+    </div>
+  </ng-container>
+</div>

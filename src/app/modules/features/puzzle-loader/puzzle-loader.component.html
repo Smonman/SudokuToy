@@ -1,0 +1,152 @@
+<app-page-layout>
+  <div class="d-flex justify-content-center">
+    <div class="col-sm-6">
+      <h1 class="h2">New puzzle</h1>
+      <form (ngSubmit)="submit()" [formGroup]="form" class="form">
+        <div class="row mb-3">
+          <div class="col-sm-9">
+            <div class="d-flex flex-row justify-content-between">
+              <label class="form-label" for="puzzle-input">Puzzle:</label>
+              <app-help-button (click)="openModal(puzzleModal)"></app-help-button>
+            </div>
+            <input class="form-control" formControlName="puzzle" id="puzzle-input"
+                   name="puzzle" type="text">
+            <app-form-errors>
+              <app-form-error *ngIf="fieldHasErrors('puzzle', 'validatePuzzle')">
+                this puzzle is not valid
+              </app-form-error>
+            </app-form-errors>
+          </div>
+          <div class="col-sm-3">
+            <div class="d-flex flex-row justify-content-between">
+              <label class="form-label" for="puzzleSize-input">Size:</label>
+              <app-help-button (click)="openModal(sizeModal)"></app-help-button>
+            </div>
+            <input class="form-control" formControlName="puzzleSize" id="puzzleSize-input" name="puzzleSize"
+                   type="number">
+            <app-form-errors>
+              <app-form-error *ngIf="fieldHasErrors('puzzleSize', 'required')">
+                the puzzle size is required
+              </app-form-error>
+              <app-form-error *ngIf="fieldHasErrors('puzzleSize', 'min')">
+                the puzzle size has to be larger than 1
+              </app-form-error>
+              <app-form-error *ngIf="fieldHasErrors('puzzleSize', 'max')">
+                the largest allowed puzzle size is 16
+              </app-form-error>
+              <app-form-error *ngIf="fieldHasErrors('puzzleSize', 'validateSizeMatch')">
+                the puzzle size has to suit the puzzle
+              </app-form-error>
+            </app-form-errors>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            <div class="d-flex flex-row justify-content-between">
+              <label class="form-label" for="boxWidth-input">Box Width:</label>
+              <app-help-button (click)="openModal(boxSizeModal)"></app-help-button>
+            </div>
+            <input class="form-control" formControlName="boxWidth" id="boxWidth-input" name="boxWidth"
+                   type="number">
+            <app-form-errors>
+              <app-form-error *ngIf="fieldHasErrors('boxWidth', 'required')">
+                the box width is required
+              </app-form-error>
+              <app-form-error *ngIf="fieldHasErrors('boxWidth', 'min')">
+                the box width has to be larger than 0
+              </app-form-error>
+              <app-form-error *ngIf="fieldHasErrors('boxWidth', 'validateDivisibleBoxSize')">
+                this box width is not valid
+              </app-form-error>
+              <app-form-error *ngIf="fieldHasErrors('boxWidth', 'validateMaxBoxSize')">
+                this box width must be smaller than the puzzle size
+              </app-form-error>
+            </app-form-errors>
+          </div>
+          <div class="col">
+            <div class="d-flex flex-row justify-content-between">
+              <label class="form-label" for="boxHeight-input">Box Height:</label>
+              <app-help-button (click)="openModal(boxSizeModal)"></app-help-button>
+            </div>
+            <input class="form-control" formControlName="boxHeight" id="boxHeight-input" name="boxHeight"
+                   type="number">
+            <app-form-errors>
+              <app-form-error *ngIf="fieldHasErrors('boxHeight', 'required')">
+                the box height is required
+              </app-form-error>
+              <app-form-error *ngIf="fieldHasErrors('boxHeight', 'min')">
+                the box height has to be larger than 0
+              </app-form-error>
+              <app-form-error *ngIf="fieldHasErrors('boxHeight', 'validateDivisibleBoxSize')">
+                this box height is not valid
+              </app-form-error>
+              <app-form-error *ngIf="fieldHasErrors('boxHeight', 'validateMaxBoxSize')">
+                this box height must be smaller than the puzzle size
+              </app-form-error>
+            </app-form-errors>
+          </div>
+        </div>
+        <div class="d-flex flex-row justify-content-between">
+          <button class="btn btn-outline-secondary" routerLink="" type="button">Cancel</button>
+          <app-reactive-button [disabled]="hasError()" [loading]="loading" label="Load Puzzle" type="submit">
+          </app-reactive-button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modals -->
+
+  <ng-template #puzzleModal let-modal>
+    <div class="modal-header px-4 pt-4">
+      <h2 class="modal-title fw-bold">Puzzle field</h2>
+    </div>
+    <div class="modal-body px-4 pb-4">
+      <p>
+        Enter your Sudoku into the <b>Puzzle</b> field as a string. Each character in the string represents one
+        cell of the Sudoku. For empty cells, use a dot or 0.
+      </p>
+      <p class="note">
+        Complete puzzles are not a valid input.
+      </p>
+      <h6>Example input</h6>
+      <samp class="text-break">1...2...3...........................4...5...6...........................7...8...9</samp>
+      <button (click)="modal.close('Close click')" class="btn btn-lg btn-primary mt-4 w-100" type="button">
+        Close
+      </button>
+    </div>
+  </ng-template>
+
+  <ng-template #sizeModal let-modal>
+    <div class="modal-header px-4 pt-4">
+      <h2 class="modal-title fw-bold">Size field</h2>
+    </div>
+    <div class="modal-body px-4 pb-4">
+      <p>
+        Enter the size of the Sudoku into the <b>Size</b> field. The size of a Sudoku is the number of cells in one row
+        or colum.
+      </p>
+      <p class="note">
+        Only square Sudoku are supported.
+      </p>
+      <button (click)="modal.close('Close click')" class="btn btn-lg btn-primary mt-4 w-100" type="button">
+        Close
+      </button>
+    </div>
+  </ng-template>
+
+  <ng-template #boxSizeModal let-modal>
+    <div class="modal-header px-4 pt-4">
+      <h2 class="modal-title fw-bold">Box Width / Height field</h2>
+    </div>
+    <div class="modal-body px-4 pb-4">
+      <p>
+        Enter the size of a Sudoku box into the corresponding <b>Box Width</b> or <b>Box Height</b> field.
+      </p>
+      <button (click)="modal.close('Close click')" class="btn btn-lg btn-primary mt-4 w-100" type="button">
+        Close
+      </button>
+    </div>
+  </ng-template>
+
+</app-page-layout>

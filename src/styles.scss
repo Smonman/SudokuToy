@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+@font-face {
+  font-family: "GrenzeGotisch";
+  src: local("GrenzeGotisch"), url(./assets/fonts/GrenzeGotisch-SemiBold.ttf) format("truetype");
+}
+
+.modal-content-rounded .modal-content {
+  @extend .rounded-4;
+  @extend .shadow;
+}
+
+.note {
+  @extend .border-info;
+  @extend .border-start;
+  @extend .border-3;
+  @extend .rounded-end;
+  @extend .bg-info;
+  @extend .bg-opacity-10;
+  @extend .p-2
+}
+
+.note::before {
+  @extend .text-info;
+  content: "Note: ";
+}
