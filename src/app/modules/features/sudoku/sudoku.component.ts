@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { SudokuService } from './services/sudoku.service';
 import { Subject, takeUntil } from 'rxjs';
 import { InputMode } from '../../shared/classes/input-mode';
@@ -10,7 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './sudoku.component.html',
   styleUrls: ['./sudoku.component.scss'],
 })
-export class SudokuComponent implements OnInit, OnDestroy {
+export class SudokuComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('finishedModal') finishedModal: TemplateRef<any> | null = null;
 
@@ -55,7 +55,9 @@ export class SudokuComponent implements OnInit, OnDestroy {
     this.sudokuService.$curInputMode
       .pipe(takeUntil(this.$destroy))
       .subscribe((im: InputMode | null) => this.curInputMode = im);
+  }
 
+  ngAfterViewInit(): void {
     this.sudokuService.$finished
       .pipe(takeUntil(this.$destroy))
       .subscribe(() => {
