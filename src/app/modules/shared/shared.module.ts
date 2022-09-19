@@ -6,7 +6,14 @@ import { PageLayoutComponent } from './components/page-layout/page-layout.compon
 import { SecondsPipe } from './pipes/seconds.pipe';
 import { FormErrorsComponent } from './components/form-errors/form-errors.component';
 import { FormErrorComponent } from './components/form-errors/form-error/form-error.component';
-import { exclamationDiamond, github, heartFill, NgxBootstrapIconsModule, questionCircle } from 'ngx-bootstrap-icons';
+import {
+  backspace,
+  exclamationDiamond,
+  github,
+  heartFill,
+  NgxBootstrapIconsModule,
+  questionCircle,
+} from 'ngx-bootstrap-icons';
 import { ReactiveButtonComponent } from './components/reactive-button/reactive-button.component';
 import { HelpButtonComponent } from './components/help-button/help-button.component';
 
@@ -15,6 +22,7 @@ const icons = {
   github,
   questionCircle,
   exclamationDiamond,
+  backspace,
 };
 
 const sharedDeclarations = [

@@ -2,12 +2,12 @@
 @import "node_modules/bootstrap/scss/variables";
 @import "node_modules/bootstrap/scss/mixins/breakpoints";
 
-.playground {
-  flex-wrap: nowrap;
+.virtual-keyboard-key-flex {
+  flex-basis: 30%;
 }
 
-@include media-breakpoint-down(lg) {
-  .playground {
-    flex-wrap: wrap;
+@include media-breakpoint-down(sm) {
+  .virtual-keyboard-key-flex {
+    flex-basis: auto;
   }
 }

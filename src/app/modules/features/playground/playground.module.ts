@@ -7,6 +7,8 @@ import { TimerComponent } from './components/timer/timer.component';
 import { SudokuComponent } from './components/sudoku/sudoku.component';
 import { SudokuCellComponent } from './components/sudoku/sudoku-cell/sudoku-cell.component';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { VirtualKeyboardComponent } from './components/virtual-keyboard/virtual-keyboard.component';
+import { VirtualKeyboardKeyComponent } from './components/virtual-keyboard/virtual-keyboard-key/virtual-keyboard-key.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
     InputModeSelectorComponent,
     TimerComponent, SudokuComponent,
     SudokuCellComponent,
+    VirtualKeyboardComponent,
+    VirtualKeyboardKeyComponent,
   ],
   imports: [SharedModule, PlaygroundRoutingModule, NgbDropdownModule],
 })

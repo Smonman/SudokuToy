@@ -1,0 +1,10 @@
+<div class="d-flex flex-row flex-wrap align-content-start justify-content-center gap-2 w-100">
+  <ng-container *ngFor="let k of [].constructor(size); let i = index;">
+    <app-virtual-keyboard-key [display]="'number'" [value]="i + 1" class="virtual-keyboard-key-flex">
+      {{i + 1}}
+    </app-virtual-keyboard-key>
+  </ng-container>
+  <app-virtual-keyboard-key [display]="'none'" [value]="'Delete'" class="virtual-keyboard-key-flex">
+    <i-bs class="d-inline-flex align-items-center" name="backspace"></i-bs>
+  </app-virtual-keyboard-key>
+</div>

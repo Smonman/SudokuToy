@@ -1,6 +1,6 @@
 <app-page-layout>
-  <div class="d-flex align-items-center justify-content-around flex-wrap">
-    <div class="d-flex flex-column align-items-center gap-2 overflow-hidden">
+  <div class="d-flex align-items-center justify-content-center gap-3 playground">
+    <div class="d-flex flex-column align-items-center gap-2 flex-shrink-0 overflow-hidden">
       <div class="d-flex flex-row justify-content-between align-content-between flex-wrap w-100"
            style="max-width: 80vw; gap: 0.5rem 4rem;">
         <app-input-mode-selector></app-input-mode-selector>
@@ -8,5 +8,6 @@
       </div>
       <app-sudoku></app-sudoku>
     </div>
+    <app-virtual-keyboard class="flex-shrink-1"></app-virtual-keyboard>
   </div>
 </app-page-layout>
