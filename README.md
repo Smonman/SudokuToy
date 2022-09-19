@@ -1,5 +1,5 @@
 # SudokuToy
-Solve your Sudoku online with this toy. This program is not a sudoku solver, it just provides a platform for you to solve your puzzels.
+Solve your Sudoku online with this toy. This program is not a sudoku solver, it just provides a platform for you to solve your puzzels. Go, and [have a look](https://smonman.github.io/SudokuToy/) yourself!
 
 ### Changelog
 
