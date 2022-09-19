@@ -1,5 +1,5 @@
-<div class="d-flex align-items-center gap-2">
-  <span>{{curTime | seconds}}</span>
+<div class="d-grid d-md-inline-flex align-items-center gap-2">
+  <span class="d-block">{{curTime | seconds}}</span>
   <div class="btn-group" role="group">
     <button (click)="start()" [disabled]="isRunning || isStopped" class="btn btn-primary btn-sm"
             role="button">

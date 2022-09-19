@@ -1,0 +1,15 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins/breakpoints";
+@import "node_modules/bootstrap/scss/vendor/rfs";
+
+.virtual-keyboard-key {
+  font-size: rfs-fluid-value(1.25rem);
+}
+
+@include media-breakpoint-down(sm) {
+  .virtual-keyboard-key {
+    font-size: rfs-fluid-value(0.8rem);
+    padding: rfs-fluid-value(0.5rem);
+  }
+}
