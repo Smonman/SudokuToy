@@ -8,7 +8,9 @@ import { SudokuComponent } from './components/sudoku/sudoku.component';
 import { SudokuCellComponent } from './components/sudoku/sudoku-cell/sudoku-cell.component';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { VirtualKeyboardComponent } from './components/virtual-keyboard/virtual-keyboard.component';
-import { VirtualKeyboardKeyComponent } from './components/virtual-keyboard/virtual-keyboard-key/virtual-keyboard-key.component';
+import {
+  VirtualKeyboardKeyComponent,
+} from './components/virtual-keyboard/virtual-keyboard-key/virtual-keyboard-key.component';
 
 @NgModule({
   declarations: [

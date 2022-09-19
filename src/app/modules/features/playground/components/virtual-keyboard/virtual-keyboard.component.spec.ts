@@ -8,9 +8,9 @@ describe('VirtualKeyboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VirtualKeyboardComponent ]
+      declarations: [VirtualKeyboardComponent],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(VirtualKeyboardComponent);
     component = fixture.componentInstance;
