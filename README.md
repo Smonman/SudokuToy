@@ -27,7 +27,7 @@ package that implements end-to-end testing capabilities.
 
 ## Deploy
 
-Run `ng deploy --base-href=<absolute path>`
+Run `ng deploy --base-href=/SudokuToy/`
 
 ## Further help
 
